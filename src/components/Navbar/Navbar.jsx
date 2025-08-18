@@ -249,7 +249,7 @@ const Navbar = () => {
     { path: '/', label: 'Home', icon: <HomeIcon /> },
     { path: '/about', label: 'About Us', icon: <PeopleIcon /> },
     { path: '/destinations', label: 'Destinations', icon: <PublicIcon /> },
-    { path: '/services', label: 'Services', icon: <BuildIcon /> },
+    // { path: '/services', label: 'Services', icon: <BuildIcon /> },
     { path: '/gallery', label: 'Gallery', icon: <PhotoCameraIcon /> },
     { path: '/contact', label: 'Contact', icon: <ContactPhoneIcon /> }
   ];

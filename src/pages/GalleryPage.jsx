@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './GalleryPage.css';
 
 const GalleryPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('popular');
 
   const galleryItems = [
     {
@@ -89,12 +91,27 @@ const GalleryPage = () => {
     { key: 'island', label: 'Island', icon: '🏝️' }
   ];
 
-  const filteredItems = activeFilter === 'all' 
-    ? galleryItems 
-    : galleryItems.filter(item => item.category === activeFilter);
+  const filteredItems = useMemo(() => {
+    const base = activeFilter === 'all'
+      ? galleryItems
+      : galleryItems.filter(item => item.category === activeFilter);
+    const q = searchQuery.trim().toLowerCase();
+    const searched = q
+      ? base.filter(item => [item.title, item.location, item.description].join(' ').toLowerCase().includes(q))
+      : base;
+    const sorted = [...searched].sort((a, b) => {
+      if (sortBy === 'az') return a.title.localeCompare(b.title);
+      if (sortBy === 'za') return b.title.localeCompare(a.title);
+      return 0;
+    });
+    return sorted;
+  }, [activeFilter, galleryItems, searchQuery, sortBy]);
 
   return (
     <div className="gallery-page">
+      {/* Breadcrumbs */}
+
+
       {/* Hero Section */}
       <section className="page-hero py-5">
         <div className="container">
@@ -123,61 +140,101 @@ const GalleryPage = () => {
             <div className="title-underline mx-auto"></div>
           </div>
 
-          {/* Filter Buttons */}
-          <div className="gallery-filters mb-5" data-aos="fade-up" data-aos-delay="200">
-            <div className="d-flex justify-content-center flex-wrap gap-2">
-              {filters.map((filter) => (
-                <button
-                  key={filter.key}
-                  className={`filter-btn ${activeFilter === filter.key ? 'active' : ''}`}
-                  onClick={() => setActiveFilter(filter.key)}
-                >
-                  <span className="filter-icon">{filter.icon}</span>
-                  <span className="filter-label">{filter.label}</span>
-                </button>
-              ))}
+          {/* Filters Toolbar */}
+          <div className="filters-toolbar mb-4" data-aos="fade-up" data-aos-delay="150">
+            <div className="filters-grid">
+              <div className="filters-left">
+                <div className="filters-chips">
+                  {filters.map((filter) => (
+                    <button
+                      key={filter.key}
+                      className={`filter-btn ${activeFilter === filter.key ? 'active' : ''}`}
+                      onClick={() => setActiveFilter(filter.key)}
+                      aria-label={`Filter by ${filter.label}`}
+                    >
+                      <span className="filter-icon">{filter.icon}</span>
+                      <span className="filter-label">{filter.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="filters-right">
+                <div className="search-wrap">
+                  <span className="search-icon">🔎</span>
+                  <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Search destinations, cities, or vibes..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    aria-label="Search photos"
+                  />
+                </div>
+                <div className="sort-wrap">
+                  <label htmlFor="sort" className="sort-label">Sort</label>
+                  <select
+                    id="sort"
+                    className="sort-select"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    aria-label="Sort order"
+                  >
+                    <option value="popular">Popular</option>
+                    <option value="az">A → Z</option>
+                    <option value="za">Z → A</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="results-count" aria-live="polite">
+              {filteredItems.length} result{filteredItems.length === 1 ? '' : 's'}
             </div>
           </div>
 
           {/* Gallery Grid */}
-          <div className="row g-4">
-            {filteredItems.map((item, index) => (
-              <div 
-                key={item.id} 
-                className="col-lg-4 col-md-6" 
-                data-aos="fade-up" 
-                data-aos-delay={index * 100}
-              >
-                <div className="gallery-item">
-                  <div className="gallery-image">
-                    <div className="image-placeholder">
-                      <span>{item.image}</span>
-                    </div>
-                    <div className="gallery-overlay">
-                      <div className="gallery-info">
-                        <h4 className="gallery-title">{item.title}</h4>
-                        <p className="gallery-location">{item.location}</p>
-                        <p className="gallery-description">{item.description}</p>
+          {filteredItems.length === 0 ? (
+            <div className="empty-state text-center" data-aos="fade-up">
+              <h4>No results</h4>
+              <p>Try adjusting your search or filters.</p>
+              <button className="btn btn-primary" onClick={() => { setActiveFilter('all'); setSearchQuery(''); setSortBy('popular'); }}>
+                Reset filters
+              </button>
+            </div>
+          ) : (
+            <div className="row g-4">
+              {filteredItems.map((item, index) => (
+                <div 
+                  key={item.id} 
+                  className="col-lg-4 col-md-6" 
+                  data-aos="fade-up" 
+                  data-aos-delay={index * 100}
+                >
+                  <div className="gallery-item">
+                    <div className="gallery-image">
+                      <img
+                        className="gallery-img"
+                        src={`https://picsum.photos/seed/vtt-${item.id}-${item.category}/800/600`}
+                        alt={`${item.title} – ${item.location}`}
+                        onError={(e) => { e.currentTarget.src = 'https://via.placeholder.com/800x600?text=Vibe+Tribe+Travels'; }}
+                        loading="lazy"
+                      />
+                      <div className="gallery-overlay">
+                        <div className="gallery-info">
+                          <h4 className="gallery-title">{item.title}</h4>
+                          <p className="gallery-location">{item.location}</p>
+                          <p className="gallery-description">{item.description}</p>
+                        </div>
+                        {/* Removed hover action buttons per request */}
                       </div>
-                      <div className="gallery-actions">
-                        <button className="btn btn-light btn-sm">
-                          <span className="btn-icon">👁️</span>
-                          View
-                        </button>
-                        <button className="btn btn-primary btn-sm">
-                          <span className="btn-icon">💳</span>
-                          Book
-                        </button>
+                      <div className="gallery-category">
+                        <span className={`category-badge category-${item.category}`}>{item.category}</span>
                       </div>
-                    </div>
-                    <div className="gallery-category">
-                      <span className="category-badge">{item.category}</span>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

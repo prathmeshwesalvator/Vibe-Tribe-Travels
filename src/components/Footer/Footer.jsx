@@ -453,7 +453,7 @@ const Footer = () => {
       </FooterMain>
 
       {/* Newsletter Section */}
-      <NewsletterSection>
+      {/* <NewsletterSection>
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={6}>
@@ -502,7 +502,7 @@ const Footer = () => {
             </Grid>
           </Grid>
         </Container>
-      </NewsletterSection>
+      </NewsletterSection> */}
 
       {/* Footer Bottom */}
       <FooterBottom>
