@@ -31,23 +31,25 @@ import {
   AccessTime as TimeIcon
 } from '@mui/icons-material';
 import { styled, alpha } from '@mui/material/styles';
+import './Footer.css';
 
-// Styled components
+// Brand palette
+const PALETTE = {
+  deepForestGreen: "#0B3D2E",
+  cream: "#FDF6EC",
+  oceanBlue: "#1D7A85",
+  sunsetOrange: "#F4A261",
+  palmGreen: "#2E8B57",
+  charcoal: "#333333",
+  lightGray: "#F1F1F1",
+  white: "#FFFFFF",
+};
+
 const FooterContainer = styled(Box)(({ theme }) => ({
-  background: `linear-gradient(135deg, ${theme.palette.background.default} 0%, ${theme.palette.background.paper} 100%)`,
-  color: theme.palette.text.primary,
+  background: PALETTE.deepForestGreen,
+  color: PALETTE.cream,
   position: 'relative',
   overflow: 'hidden',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '100px',
-    background: `linear-gradient(to bottom, transparent, ${theme.palette.background.default})`,
-    zIndex: 1,
-  },
 }));
 
 const FooterMain = styled(Box)(({ theme }) => ({
@@ -60,8 +62,8 @@ const FooterMain = styled(Box)(({ theme }) => ({
 }));
 
 const FooterBottom = styled(Box)(({ theme }) => ({
-  background: alpha(theme.palette.background.paper, 0.8),
-  borderTop: `1px solid ${alpha(theme.palette.divider, 0.2)}`,
+  background: PALETTE.deepForestGreen,
+  borderTop: `1px solid ${alpha(PALETTE.cream, 0.08)}`,
   position: 'relative',
   zIndex: 2,
   padding: theme.spacing(3, 0),
@@ -74,13 +76,13 @@ const BrandSection = styled(Box)(({ theme }) => ({
 const LogoAvatar = styled(Avatar)(({ theme }) => ({
   width: 70,
   height: 70,
-  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-  boxShadow: '0 4px 20px rgba(59, 130, 246, 0.4)',
+  background: `linear-gradient(135deg, ${PALETTE.oceanBlue} 0%, ${PALETTE.sunsetOrange} 100%)`,
+  boxShadow: '0 4px 20px rgba(29, 122, 133, 0.18)',
   marginBottom: theme.spacing(2),
   transition: 'all 0.3s ease',
   '&:hover': {
     transform: 'scale(1.1) rotate(5deg)',
-    boxShadow: '0 8px 30px rgba(59, 130, 246, 0.6)',
+    boxShadow: '0 8px 30px rgba(29, 122, 133, 0.28)',
   },
   [theme.breakpoints.down('md')]: {
     width: 60,
@@ -89,7 +91,7 @@ const LogoAvatar = styled(Avatar)(({ theme }) => ({
 }));
 
 const BrandName = styled(Typography)(({ theme }) => ({
-  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+  background: `linear-gradient(135deg, ${PALETTE.oceanBlue} 0%, ${PALETTE.sunsetOrange} 100%)`,
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
@@ -102,7 +104,7 @@ const BrandName = styled(Typography)(({ theme }) => ({
 }));
 
 const BrandDescription = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.secondary,
+  color: alpha(PALETTE.cream, 0.85),
   lineHeight: 1.7,
   marginBottom: theme.spacing(3),
   fontSize: '0.95rem',
@@ -118,9 +120,12 @@ const SocialContainer = styled(Box)(({ theme }) => ({
 const SocialButton = styled(IconButton)(({ theme }) => ({
   width: 50,
   height: 50,
-  color: 'white',
+  color: PALETTE.white,
+  background: PALETTE.oceanBlue,
   transition: 'all 0.3s ease',
   '&:hover': {
+    background: PALETTE.sunsetOrange,
+    color: PALETTE.white,
     transform: 'scale(1.1) rotate(5deg)',
   },
   [theme.breakpoints.down('sm')]: {
@@ -130,7 +135,7 @@ const SocialButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const FooterTitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.primary,
+  color: PALETTE.cream,
   fontWeight: 700,
   fontSize: '1.2rem',
   marginBottom: theme.spacing(2),
@@ -142,7 +147,7 @@ const FooterTitle = styled(Typography)(({ theme }) => ({
     left: 0,
     width: '40px',
     height: '3px',
-    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+    background: `linear-gradient(90deg, ${PALETTE.oceanBlue}, ${PALETTE.sunsetOrange})`,
     borderRadius: '2px',
   },
   [theme.breakpoints.down('md')]: {
@@ -155,15 +160,15 @@ const FooterTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const FooterLink = styled(Link)(({ theme }) => ({
-  color: theme.palette.text.secondary,
+  color: alpha(PALETTE.cream, 0.85),
   textDecoration: 'none',
   transition: 'all 0.3s ease',
-  fontSize: '0.9rem',
+  fontSize: '0.95rem',
   display: 'block',
   padding: theme.spacing(0.5, 0),
   position: 'relative',
   '&:hover': {
-    color: theme.palette.primary.main,
+    color: PALETTE.sunsetOrange,
     transform: 'translateX(8px)',
   },
   '&::before': {
@@ -172,7 +177,7 @@ const FooterLink = styled(Link)(({ theme }) => ({
     left: '-20px',
     opacity: 0,
     transition: 'all 0.3s ease',
-    color: theme.palette.primary.main,
+    color: PALETTE.sunsetOrange,
   },
   '&:hover::before': {
     opacity: 1,
@@ -189,70 +194,22 @@ const FooterLink = styled(Link)(({ theme }) => ({
   },
 }));
 
-const NewsletterSection = styled(Box)(({ theme }) => ({
-  background: alpha(theme.palette.primary.main, 0.1),
-  borderTop: `1px solid ${alpha(theme.palette.divider, 0.2)}`,
-  borderBottom: `1px solid ${alpha(theme.palette.divider, 0.2)}`,
-  position: 'relative',
-  zIndex: 2,
-  padding: theme.spacing(4, 0),
-}));
-
-const NewsletterTitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.primary,
-  fontWeight: 700,
-  fontSize: '1.4rem',
-  marginBottom: theme.spacing(1),
-}));
-
-const NewsletterDescription = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.secondary,
-  fontSize: '0.95rem',
-  lineHeight: 1.6,
-  marginBottom: theme.spacing(3),
-}));
-
-const NewsletterForm = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(2),
-  maxWidth: 500,
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    alignItems: 'stretch',
-  },
-}));
-
-const NewsletterButton = styled(Button)(({ theme }) => ({
-  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-  color: '#ffffff',
-  borderRadius: '25px',
-  padding: theme.spacing(1.5, 3),
-  fontWeight: 600,
-  textTransform: 'none',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
-    transform: 'translateY(-2px)',
-    boxShadow: '0 6px 20px rgba(59, 130, 246, 0.4)',
-  },
-}));
-
 const ContactInfo = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   gap: theme.spacing(1.5),
   marginBottom: theme.spacing(1.5),
-  color: theme.palette.text.secondary,
+  color: alpha(PALETTE.cream, 0.85),
 }));
 
 const ContactIcon = styled(Box)(({ theme }) => ({
-  color: theme.palette.primary.main,
+  color: PALETTE.sunsetOrange,
   display: 'flex',
   alignItems: 'center',
 }));
 
 const Copyright = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.secondary,
+  color: alpha(PALETTE.cream, 0.7),
   fontSize: '0.9rem',
   textAlign: 'center',
   [theme.breakpoints.up('md')]: {
@@ -261,7 +218,7 @@ const Copyright = styled(Typography)(({ theme }) => ({
 }));
 
 const MadeWith = styled(Typography)(({ theme }) => ({
-  color: '#ef4444',
+  color: PALETTE.sunsetOrange,
   fontWeight: 500,
   fontSize: '0.9rem',
   textAlign: 'center',
@@ -311,13 +268,6 @@ const Footer = () => {
     { icon: <YouTubeIcon />, label: 'YouTube', url: '#', color: '#ff0000' }
   ];
 
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    // Handle newsletter subscription
-    console.log('Newsletter subscription:', email);
-    setEmail('');
-  };
-
   return (
     <FooterContainer component="footer">
       <FooterMain>
@@ -328,7 +278,7 @@ const Footer = () => {
               <Fade in={true} timeout={800}>
                 <BrandSection>
                   <LogoAvatar>
-                    <FlightIcon sx={{ fontSize: '2.2rem' }} />
+                    <FlightIcon sx={{ fontSize: '2.2rem', color: PALETTE.white }} />
                   </LogoAvatar>
                   <BrandName variant="h3">
                     Vibe Tribe Travels
@@ -373,10 +323,11 @@ const Footer = () => {
                         href={social.url}
                         aria-label={social.label}
                         sx={{
-                          background: social.color || '#3b82f6',
+                          background: social.color || PALETTE.oceanBlue,
                           '&:hover': {
-                            background: social.color || '#3b82f6',
-                            boxShadow: `0 6px 20px ${alpha(social.color || '#3b82f6', 0.6)}`,
+                            background: PALETTE.sunsetOrange,
+                            color: PALETTE.white,
+                            boxShadow: `0 6px 20px ${alpha(PALETTE.sunsetOrange, 0.4)}`,
                           },
                         }}
                       >
@@ -452,59 +403,6 @@ const Footer = () => {
         </Container>
       </FooterMain>
 
-      {/* Newsletter Section */}
-      {/* <NewsletterSection>
-        <Container maxWidth="lg">
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Slide direction="up" in={true} timeout={800}>
-                <Box>
-                  <NewsletterTitle variant="h5">
-                    Stay Updated
-                  </NewsletterTitle>
-                  <NewsletterDescription variant="body1">
-                    Subscribe to our newsletter for exclusive travel deals, destination guides, and insider tips.
-                  </NewsletterDescription>
-                </Box>
-              </Slide>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Zoom in={true} timeout={1000}>
-                <Box component="form" onSubmit={handleNewsletterSubmit}>
-                  <NewsletterForm>
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          backgroundColor: 'white',
-                          borderRadius: '25px',
-                          '& fieldset': {
-                            border: 'none',
-                          },
-                        },
-                      }}
-                    />
-                    <NewsletterButton
-                      type="submit"
-                      variant="contained"
-                      startIcon={<SendIcon />}
-                    >
-                      Subscribe
-                    </NewsletterButton>
-                  </NewsletterForm>
-                </Box>
-              </Zoom>
-            </Grid>
-          </Grid>
-        </Container>
-      </NewsletterSection> */}
-
-      {/* Footer Bottom */}
       <FooterBottom>
         <Container maxWidth="xl">
           <Grid container spacing={2} alignItems="center">
@@ -525,4 +423,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;

@@ -18,9 +18,25 @@
   transform: translateY(-6px) scale(1.02);
 }
 
+@media (max-width: 900px) {
+  .about-card {
+    margin-bottom: 1.5rem;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .about-badge {
+    font-size: 0.95rem;
+  }
+}
+
 @media (max-width: 600px) {
   .about-card {
     margin-bottom: 1.5rem;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .about-badge {
+    font-size: 0.9rem;
   }
 }
 

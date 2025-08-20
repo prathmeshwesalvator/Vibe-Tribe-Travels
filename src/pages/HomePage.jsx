@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import About from '../components/About/About';
 import Destinations from '../components/Destinations/Destinations';
+import Services from '../components/Services/Services';
 import './HomePage.css';
 
 const HomePage = () => {
@@ -10,172 +11,109 @@ const HomePage = () => {
     <div className="home-page">
       {/* Hero Section */}
       <Hero />
+
+      <hr />
       
       {/* About Section */}
       <About />
       
+      <hr />
+      
       {/* Destinations Preview Section */}
-      <section className="destinations-preview py-5">
-        <div className="container">
-          <div className="text-center mb-5" data-aos="fade-up">
-            <div className="section-badge mb-3">
-              <span>🌍 Featured Destinations</span>
-            </div>
-            <h2 className="section-title">Discover Your Next Adventure</h2>
-            <p className="section-subtitle">
-              Explore our handpicked destinations that will leave you breathless
-            </p>
-            <div className="title-underline mx-auto"></div>
-          </div>
-          
-          <div className="row g-4">
-            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-              <div className="destination-preview-card">
-                <div className="card-image">
-                  <div className="image-placeholder bali">
-                    <span>🏝️</span>
-                  </div>
-                  <div className="card-overlay">
-                    <div className="overlay-content">
-                      <h4>Bali, Indonesia</h4>
-                      <p>From $1,299</p>
-                      <Link to="/destinations" className="btn btn-light btn-sm">
-                        Learn More
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <div className="destination-preview-card">
-                <div className="card-image">
-                  <div className="image-placeholder swiss">
-                    <span>🏔️</span>
-                  </div>
-                  <div className="card-overlay">
-                    <div className="overlay-content">
-                      <h4>Swiss Alps</h4>
-                      <p>From $1,899</p>
-                      <Link to="/destinations" className="btn btn-light btn-sm">
-                        Learn More
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-              <div className="destination-preview-card">
-                <div className="card-image">
-                  <div className="image-placeholder santorini">
-                    <span>🏛️</span>
-                  </div>
-                  <div className="card-overlay">
-                    <div className="overlay-content">
-                      <h4>Santorini, Greece</h4>
-                      <p>From $999</p>
-                      <Link to="/destinations" className="btn btn-light btn-sm">
-                        Learn More
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="text-center mt-5">
-            <Link to="/destinations" className="btn btn-primary btn-lg">
-              <span className="btn-icon">🌍</span>
-              View All Destinations
-            </Link>
-          </div>
-        </div>
-      </section>
+      <Destinations />
       
       {/* Services Preview Section */}
-      <section className="services-preview py-5">
-        <div className="container">
-          <div className="text-center mb-5" data-aos="fade-up">
-            <div className="section-badge mb-3">
-              <span>🛠️ Our Services</span>
-            </div>
-            <h2 className="section-title">Comprehensive Travel Solutions</h2>
-            <p className="section-subtitle">
-              From planning to execution, we handle every aspect of your journey
-            </p>
-            <div className="title-underline mx-auto"></div>
-          </div>
-          
-          <div className="row g-4">
-            <div className="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-              <div className="service-preview-card">
-                <div className="service-icon">✈️</div>
-                <h5>Flight Booking</h5>
-                <p>Best deals on flights worldwide</p>
-              </div>
-            </div>
-            
-            <div className="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <div className="service-preview-card">
-                <div className="service-icon">🏨</div>
-                <h5>Hotel Reservations</h5>
-                <p>Luxury and budget accommodations</p>
-              </div>
-            </div>
-            
-            <div className="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-              <div className="service-preview-card">
-                <div className="service-icon">🚗</div>
-                <h5>Transportation</h5>
-                <p>Seamless travel arrangements</p>
-              </div>
-            </div>
-            
-            <div className="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-              <div className="service-preview-card">
-                <div className="service-icon">🎫</div>
-                <h5>Activity Tickets</h5>
-                <p>Exclusive access to attractions</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="text-center mt-5">
-            <Link to="/services" className="btn btn-outline-primary btn-lg">
-              <span className="btn-icon">🛠️</span>
-              Explore All Services
-            </Link>
-          </div>
-        </div>
-      </section>
-      
+      <Services />
+
       {/* CTA Section */}
-      <section className="cta-section py-5">
-        <div className="container">
-          <div className="cta-content text-center" data-aos="fade-up">
-            <h2 className="cta-title">Ready to Start Your Journey?</h2>
-            <p className="cta-description">
-              Let us help you create the perfect travel experience. Contact our experts today!
-            </p>
-            <div className="cta-buttons">
-              <Link to="/contact" className="btn btn-primary btn-lg me-3 mb-2">
-                <span className="btn-icon">📞</span>
-                Get Started
-              </Link>
-              <Link to="/gallery" className="btn btn-outline-light btn-lg mb-2">
-                <span className="btn-icon">📸</span>
-                View Gallery
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+ <section
+  className="cta-section"
+  style={{
+    background: "#FDF6EC", // Cream background
+    padding: "3rem 0",
+    borderTop: "2px solid #1D7A85", // Ocean Blue accent
+    borderBottom: "2px solid #F4A261", // Sunset Orange accent
+  }}
+>
+  <div className="container">
+    <div className="cta-content text-center" data-aos="fade-up">
+      <h2
+        className="cta-title"
+        style={{
+          color: "#0B3D2E", // Deep Forest Green
+          fontWeight: 900,
+          marginBottom: "1rem",
+        }}
+      >
+        Ready to Start Your Journey?
+      </h2>
+      <p
+        className="cta-description"
+        style={{
+          color: "#333333", // Charcoal Gray
+          fontSize: "1.15rem",
+          marginBottom: "2rem",
+        }}
+      >
+        Let us help you create the perfect travel experience. Contact our experts today!
+      </p>
+      <div className="cta-buttons" style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
+        <Link
+          to="/contact"
+          className="btn"
+          style={{
+            background: "#1D7A85", // Ocean Blue
+            color: "#FDF6EC", // Cream
+            fontWeight: 800,
+            borderRadius: 999,
+            padding: "0.75rem 2.2rem",
+            fontSize: "1.1rem",
+            boxShadow: "0 4px 18px rgba(29,122,133,0.13)",
+            border: "none",
+            transition: "background 0.2s, color 0.2s",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+          }}
+          onMouseOver={e => { e.currentTarget.style.background = "#F4A261"; e.currentTarget.style.color = "#333"; }}
+          onMouseOut={e => { e.currentTarget.style.background = "#1D7A85"; e.currentTarget.style.color = "#FDF6EC"; }}
+        >
+          <span className="btn-icon" style={{ fontSize: "1.3em" }}>📞</span>
+          Get Started
+        </Link>
+        {/* <Link
+          to="/gallery"
+          className="btn"
+          style={{
+            background: "#FFFFFF", // White
+            color: "#1D7A85", // Ocean Blue
+            fontWeight: 800,
+            borderRadius: 999,
+            padding: "0.75rem 2.2rem",
+            fontSize: "1.1rem",
+            border: "2px solid #1D7A85",
+            boxShadow: "0 4px 18px rgba(29,122,133,0.08)",
+            transition: "background 0.2s, color 0.2s, border 0.2s",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+          }}
+          onMouseOver={e => { e.currentTarget.style.background = "#F4A261"; e.currentTarget.style.color = "#fff"; e.currentTarget.style.border = "2px solid #F4A261"; }}
+          onMouseOut={e => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#1D7A85"; e.currentTarget.style.border = "2px solid #1D7A85"; }}
+        >
+          <span className="btn-icon" style={{ fontSize: "1.3em" }}>📸</span>
+          View Gallery
+        </Link> */}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
     </div>
   );
 };
 
-export default HomePage; 
+export default HomePage;

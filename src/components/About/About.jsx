@@ -46,6 +46,8 @@ const PALETTE = {
   cream: '#FDF6EC',
   charcoal: '#222C22',
   white: '#FFFFFF',
+  oceanBlue: '#1D7A85',
+  sunsetOrange: '#F4A261',
 };
 
 const AboutRoot = styled(Box)(({ theme }) => ({
@@ -218,14 +220,12 @@ const About = () => {
     <AboutRoot ref={sectionRef}>
       <Backdrop sx={{ transform: `translateY(${parallax * 0.35}px)` }} />
 
-      <Box
+      <Container
+        maxWidth="lg"
         sx={{
-          width: '100vw',
-          maxWidth: '100%',
-          px: { xs: 0, sm: 2 },
-          mx: 'auto',
           position: 'relative',
           zIndex: 1,
+          py: { xs: 2, md: 4 },
         }}
       >
         <SectionHeader>
@@ -249,244 +249,134 @@ const About = () => {
           </Stack>
         </SectionHeader>
 
-        {/* 2x2 Grid */}
+        {/* 2x2 Responsive Grid */}
         <Grid
           container
-          spacing={0}
+          spacing={4}
+          alignItems="stretch"
           sx={{
-            width: '100vw',
-            maxWidth: '100%',
-            margin: 0,
-            px: 0,
-            display: 'flex',
-            flexWrap: 'wrap',
-            minHeight: { xs: 'auto', md: '80vh' },
+            width: '100%',
+            mx: 0,
+            mb: 4,
+            // Prevent overflow and ensure no overlap
+            position: 'relative',
           }}
         >
-          {/* First Row: Animation (00) and Story Content (01) */}
-       <Box
-  sx={{
-    display: "flex",
-    justifyContent: "space-around", // centers the pair
-    alignItems: "center",
-    // gap: { xs: 4, md: 8 }, // spacing between animation & content
-    flexWrap: { xs: "wrap", md: "nowrap" }, // stack on mobile, side by side on desktop
-    minHeight: { xs: 220, md: 400 },
-    width: "100%",
-
-    // px: { xs: 2, md: 6 }, // padding around
-    // backgroundColor: "red",
-  }}
->
-  {/* Left Side (Lottie animation) */}
-  <Fade in={inView} timeout={1000}>
-    <Box
-      sx={{
-        // width: { xs: 400, sm: 280, md: 340 },
-        // height: { xs: 200, sm: 280, md: 340 },
-        width : '50%',
-        // height : '100%',
-        // borderRadius: "50%",
-        // boxShadow: "0 8px 32px rgba(24,77,54,0.10)",
-        // background: `linear-gradient(135deg, ${alpha(
-        //   PALETTE.sky,
-        //   0.10
-        // )} 0%, ${alpha(PALETTE.sun, 0.10)} 100%)`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexShrink: 0, // prevents shrinking
-        // backgroundColor: "yellow"
-      }}
-    >
-      <Lottie
-        role="img"
-        aria-label="Travel animation"
-        animationData={travelLottie}
-        loop
-        style={{
-          width: "80%",
-          height: "80%",
-        }}
-      />
-    </Box>
-  </Fade>
-
-  {/* Right Side (StoryCard) */}
-  <Grow in={inView} timeout={900}>
-    <StoryCard
-      sx={{
-        minHeight: { md: 220 },
-        maxWidth: 480,
-        flex: 1,
-        mx: "auto",
-        boxShadow: "none",
-        bgcolor: "transparent",
-        border: "2px solid #043b2d"
-      }}
-    >
-      <Stack spacing={2.25}>
-        <Stack direction="row" spacing={1.25} alignItems="center">
-          <Avatar sx={{ bgcolor: alpha(PALETTE.sky, 0.18) }}>
-            <VerifiedIcon sx={{ color: PALETTE.sky }} />
-          </Avatar>
-          <Typography
-            variant="h6"
-            sx={{ fontWeight: 800, color: PALETTE.deepForestGreen }}
-          >
-            Our Story
-          </Typography>
-        </Stack>
-        <Typography
-          variant="body1"
-          sx={{ color: PALETTE.charcoal, opacity: 0.93 }}
-        >
-          Born from a love for slow, sustainable travel, Vibe Tribe Travels began
-          guiding small groups across hidden trails and coastal towns. Today, we
-          plan bespoke journeys that balance adventure with ease — while
-          supporting the communities you visit.
-        </Typography>
-        <Divider />
-        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-          {[HikingIcon, EmojiEventsIcon, PublicIcon].map((Icon, i) => (
-            <Chip
-              key={i}
-              icon={<Icon />}
-              label={["Guided Treks", "Award-Winning", "Global Network"][i]}
-              sx={{
-                backgroundColor: alpha(PALETTE.sun, 0.1),
-                color: PALETTE.charcoal,
-                fontWeight: 700,
-                borderRadius: 999,
-                fontSize: 13,
-              }}
-            />
-          ))}
-        </Stack>
-      </Stack>
-    </StoryCard>
-  </Grow>
-</Box>
-
-
-          {/* Second Row: Value Cards (10) and Animation (11) */}
-          <Box
-  sx={{
-    display: "flex",
-    justifyContent: "space-around", // centers the pair
-    alignItems: "center",
-    gap: { xs: 4, md: 8 }, // space between cards & globe
-    flexWrap: { xs: "wrap", md: "nowrap" }, // stack on mobile, row on desktop
-    minHeight: { xs: 220, md: 400 },
-    width: "100%",
-    px: { xs: 2, md: 6 },
-    py: { xs: 4, md: 6 },
-  }}
->
-  {/* Left Side (Value Cards) */}
-  <Stack spacing={3} sx={{ width: "100%", 
-    maxWidth: 480,
-    border: "2px solid #043b2d",
-    padding: "20px" , 
-    borderRadius : '5%'
-    }}>
-    {values.map((v, idx) => (
-      <Zoom
-        in={inView}
-        style={{ transitionDelay: `${200 + idx * 80}ms` }}
-        key={v.title}
-      >
-        <ValueCard
-          className="about-card"
-          sx={{ position: "relative", overflow: "visible", height: "100%" }}
-        >
-          <CardContent
+          {/* 00: Animation */}
+          <Grid
+            item
+            xs={12}
+            md={6}
             sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              height: "100%",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              minHeight: { xs: 180, md: 320 },
+              p: { xs: 1, md: 3 },
+              overflow: 'hidden',
+              zIndex: 1,
             }}
           >
-            <Box sx={{ width: 60, height: 60, mx: 2 }}>
+            <Box
+              className="about-lottie-wrap"
+              sx={{
+                width: { xs: '80vw', sm: 320, md: 340 },
+                maxWidth: { xs: 340, sm: 400, md: 420 },
+                minWidth: 120,
+                height: { xs: 180, sm: 220, md: 260 },
+                maxHeight: 320,
+                minHeight: 120,
+                mx: 'auto',
+                borderRadius: '50%',
+                background: `linear-gradient(135deg, ${alpha(PALETTE.sky, 0.10)} 0%, ${alpha(PALETTE.sun, 0.10)} 100%)`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+                overflow: 'hidden',
+                zIndex: 1,
+              }}
+            >
               <Lottie
-                animationData={valueLotties[idx]}
+                role="img"
+                aria-label="Travel animation"
+                animationData={travelLottie}
                 loop
-                style={{ width: "100%", height: "100%" }}
+                style={{
+                  width: '90%',
+                  height: '90%',
+                  minWidth: 80,
+                  minHeight: 80,
+                  zIndex: 1,
+                  pointerEvents: 'none',
+                }}
               />
             </Box>
-            <Stack
-              spacing={0.5}
-              alignItems="flex-start"
-              textAlign="left"
-              sx={{ width: "100%" }}
+          </Grid>
+          {/* 01: Content */}
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: { xs: 180, md: 320 },
+              p: { xs: 1, md: 3 },
+              zIndex: 2,
+            }}
+          >
+            <StoryCard
+              sx={{
+                width: '100%',
+                maxWidth: 480,
+                mx: 'auto',
+                boxShadow: 'none',
+                bgcolor: 'transparent',
+                position: 'relative',
+                zIndex: 2,
+              }}
             >
-              <Typography
-                variant="subtitle1"
-                sx={{ fontWeight: 800, color: PALETTE.deepForestGreen }}
-              >
-                {v.title}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: PALETTE.charcoal, opacity: 0.92 }}
-              >
-                {v.desc}
-              </Typography>
-            </Stack>
-          </CardContent>
-        </ValueCard>
-      </Zoom>
-    ))}
-  </Stack>
-
-  {/* Right Side (Globe Animation) */}
-  <Fade in={inView} timeout={1200}>
-    <Box
-      sx={{
-        width: '50%',
-        height: '80%',
-        // borderRadius: "50%",
-        // boxShadow: "0 8px 32px rgba(255,209,128,0.10)",
-        // background: `linear-gradient(135deg, ${alpha(
-        //   PALETTE.sun,
-        //   0.13
-        // )} 0%, ${alpha(PALETTE.moss, 0.10)} 100%)`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexShrink: 0,
-      }}
-    >
-      <Lottie
-        role="img"
-        aria-label="Globe animation"
-        animationData={globeLottie}
-        loop
-        style={{
-          width: "85%",
-          height: "85%",
-          minWidth: 100,
-          minHeight: 100,
-        }}
-      />
-    </Box>
-  </Fade>
-</Box>
-
-
+              <Stack spacing={2.25}>
+                <Stack direction="row" spacing={1.25} alignItems="center">
+                  <Avatar sx={{ bgcolor: alpha(PALETTE.sky, 0.18) }}>
+                    <VerifiedIcon sx={{ color: PALETTE.sky }} />
+                  </Avatar>
+                  <Typography variant="h6" sx={{ fontWeight: 800, color: PALETTE.deepForestGreen }}>
+                    Our Story
+                  </Typography>
+                </Stack>
+                <Typography variant="body1" sx={{ color: PALETTE.charcoal, opacity: 0.93 }}>
+                  Born from a love for slow, sustainable travel, Vibe Tribe Travels began guiding small groups across hidden trails and coastal towns. Today, we plan bespoke journeys that balance adventure with ease — while supporting the communities you visit.
+                </Typography>
+                <Divider />
+                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                  {[HikingIcon, EmojiEventsIcon, PublicIcon].map((Icon, i) => (
+                    <Chip
+                      key={i}
+                      icon={<Icon />}
+                      label={["Guided Treks", "Award-Winning", "Global Network"][i]}
+                      sx={{
+                        backgroundColor: alpha(PALETTE.sun, 0.1),
+                        color: PALETTE.charcoal,
+                        fontWeight: 700,
+                        borderRadius: 999,
+                        fontSize: 13,
+                      }}
+                    />
+                  ))}
+                </Stack>
+              </Stack>
+            </StoryCard>
+          </Grid>
+   
         </Grid>
-
-
-
-
-
-
 
         {/* CTA */}
         <CTASection>
-          <Grid container alignItems="center" spacing={85}>
+          <Grid container alignItems="center" spacing={4}>
             <Grid item xs={12} md={8}>
               <Typography variant="h5" sx={{ fontWeight: 900, color: PALETTE.cream, letterSpacing: -0.5 }}>
                 Ready to craft your next journey?
@@ -502,33 +392,25 @@ const About = () => {
                   variant="contained"
                   size="large"
                   sx={{
-                    backgroundColor: PALETTE.sky,
-                    color: PALETTE.deepForestGreen,
+                    backgroundColor: PALETTE.oceanBlue,
+                    color: PALETTE.white,
                     px: 3,
                     py: 1.5,
                     borderRadius: 999,
                     fontWeight: 800,
-                    boxShadow: `0 6px 18px ${alpha(PALETTE.sky, 0.18)}`,
+                    boxShadow: `0 6px 18px ${alpha(PALETTE.oceanBlue, 0.25)}`,
                     textTransform: 'none',
                     fontSize: 18,
-                    '&:hover': { backgroundColor: PALETTE.sun, color: PALETTE.charcoal },
+                    '&:hover': { backgroundColor: PALETTE.sun, color: PALETTE.white },
                   }}
                 >
                   Plan with an expert
                 </Button>
               </Box>
             </Grid>
-
-
-
-
-
-
           </Grid>
         </CTASection>
-
-
-      </Box>
+      </Container>
     </AboutRoot>
   );
 };
