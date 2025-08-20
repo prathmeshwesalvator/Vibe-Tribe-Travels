@@ -1,35 +1,53 @@
-/* Essential animations for Material-UI Hero component */
-
-/* Ensure smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Orbit animation for chips */
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
-/* Custom scrollbar for webkit browsers */
-::-webkit-scrollbar {
-  width: 8px;
+/* Floating cards */
+@keyframes cardFloat {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-10px) }
+  100% { transform: translateY(0) }
 }
 
-::-webkit-scrollbar-track {
-  background: #1e293b;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .hero-particle {
+    animation: none !important;
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  border-radius: 4px;
+/* Scroll cue animation */
+.scroll-cue svg {
+  animation: scrollPulse 1.6s ease-in-out infinite;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+.scroll-cue svg:nth-child(2) {
+  animation-delay: 0.15s;
 }
 
-/* Selection styling */
-::selection {
-  background: rgba(59, 130, 246, 0.3);
-  color: #ffffff;
+.scroll-cue svg:nth-child(3) {
+  animation-delay: 0.3s;
 }
 
-::-moz-selection {
-  background: rgba(59, 130, 246, 0.3);
-  color: #ffffff;
-} 
+@keyframes scrollPulse {
+  0% { transform: translateY(0); opacity: 0.2; }
+  50% { transform: translateY(4px); opacity: 0.9; }
+  100% { transform: translateY(0); opacity: 0.2; }
+}
+
+/* Particle movement with more drift/rotation */
+.hero-particle {
+  animation-name: heroFloat2D;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes heroFloat2D {
+  0%   { transform: translate3d(0, 0, 0) rotate(0) scale(1); opacity: 0.85; }
+  50%  { transform: translate3d(var(--dx, 28px), calc(-1 * var(--dy, 20px)), 0) rotate(var(--rot, 10deg)) scale(1.08); opacity: 1; }
+  100% { transform: translate3d(0, 0, 0) rotate(0) scale(1); opacity: 0.85; }
+}
+
+

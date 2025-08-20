@@ -4,7 +4,7 @@
 
 /* Destinations Hero Section */
 .destinations-hero {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, var(--bg-default) 0%, #e2e8f0 100%);
   position: relative;
   overflow: hidden;
 }
@@ -16,20 +16,20 @@
   left: 0;
   right: 0;
   height: 100px;
-  background: linear-gradient(to bottom, transparent, #f8fafc);
+  background: linear-gradient(to bottom, transparent, var(--bg-default));
 }
 
 .hero-title {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  color: #1e293b;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
   line-height: 1.2;
 }
 
 .hero-description {
   font-size: 1.25rem;
-  color: #64748b;
+  color: var(--text-secondary);
   margin-bottom: 3rem;
   max-width: 800px;
   margin-left: auto;
@@ -49,7 +49,7 @@
 .stat-number {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #3b82f6;
+  color: var(--color-primary);
   margin-bottom: 0.5rem;
   line-height: 1;
 }
@@ -92,14 +92,14 @@
 }
 
 .filter-btn:hover {
-  border-color: #3b82f6;
-  color: #3b82f6;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
 }
 
 .filter-btn.active {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  background: var(--gradient-primary);
   border-color: transparent;
   color: white;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
@@ -122,7 +122,7 @@
 
 /* Destinations Grid */
 .destinations-grid {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, var(--bg-default) 0%, #e2e8f0 100%);
   position: relative;
   overflow: hidden;
 }
@@ -134,7 +134,7 @@
   left: 0;
   right: 0;
   height: 100px;
-  background: linear-gradient(to bottom, transparent, #f8fafc);
+  background: linear-gradient(to bottom, transparent, var(--bg-default));
 }
 
 .destination-card {
@@ -286,7 +286,7 @@
 }
 
 .destination-name {
-  color: #1e293b;
+  color: var(--text-primary);
   margin-bottom: 1rem;
   font-weight: 700;
   font-size: 1.5rem;
@@ -294,7 +294,7 @@
 }
 
 .destination-description {
-  color: #64748b;
+  color: var(--text-secondary);
   margin-bottom: 1.5rem;
   line-height: 1.6;
   font-size: 1rem;
@@ -308,7 +308,7 @@
 }
 
 .feature-tag {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  background: var(--gradient-primary);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -328,13 +328,13 @@
 .destination-highlights {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, var(--bg-default) 0%, #e2e8f0 100%);
   border-radius: 16px;
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid var(--color-primary);
 }
 
 .destination-highlights h6 {
-  color: #1e293b;
+  color: var(--text-primary);
   font-weight: 700;
   margin-bottom: 1rem;
   font-size: 1rem;
@@ -347,7 +347,7 @@
 }
 
 .destination-highlights li {
-  color: #475569;
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
   padding-left: 1.5rem;
   position: relative;
@@ -358,7 +358,7 @@
   content: '•';
   position: absolute;
   left: 0;
-  color: #3b82f6;
+  color: var(--color-primary);
   font-weight: 700;
   font-size: 1.2rem;
 }
@@ -395,13 +395,13 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  background: var(--gradient-primary);
   color: white;
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary-dark) 100%);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
   color: white;
@@ -409,12 +409,12 @@
 
 .btn-outline-primary {
   background: transparent;
-  color: #3b82f6;
-  border: 2px solid #3b82f6;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .btn-outline-primary:hover {
-  background: #3b82f6;
+  background: var(--color-primary);
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);

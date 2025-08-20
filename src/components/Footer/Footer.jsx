@@ -34,8 +34,8 @@ import { styled, alpha } from '@mui/material/styles';
 
 // Styled components
 const FooterContainer = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-  color: '#e2e8f0',
+  background: `linear-gradient(135deg, ${theme.palette.background.default} 0%, ${theme.palette.background.paper} 100%)`,
+  color: theme.palette.text.primary,
   position: 'relative',
   overflow: 'hidden',
   '&::before': {
@@ -45,7 +45,7 @@ const FooterContainer = styled(Box)(({ theme }) => ({
     left: 0,
     right: 0,
     height: '100px',
-    background: 'linear-gradient(to bottom, transparent, #0f172a)',
+    background: `linear-gradient(to bottom, transparent, ${theme.palette.background.default})`,
     zIndex: 1,
   },
 }));
@@ -74,7 +74,7 @@ const BrandSection = styled(Box)(({ theme }) => ({
 const LogoAvatar = styled(Avatar)(({ theme }) => ({
   width: 70,
   height: 70,
-  background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
   boxShadow: '0 4px 20px rgba(59, 130, 246, 0.4)',
   marginBottom: theme.spacing(2),
   transition: 'all 0.3s ease',
@@ -89,7 +89,7 @@ const LogoAvatar = styled(Avatar)(({ theme }) => ({
 }));
 
 const BrandName = styled(Typography)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
@@ -102,7 +102,7 @@ const BrandName = styled(Typography)(({ theme }) => ({
 }));
 
 const BrandDescription = styled(Typography)(({ theme }) => ({
-  color: '#94a3b8',
+  color: theme.palette.text.secondary,
   lineHeight: 1.7,
   marginBottom: theme.spacing(3),
   fontSize: '0.95rem',
@@ -130,7 +130,7 @@ const SocialButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const FooterTitle = styled(Typography)(({ theme }) => ({
-  color: '#ffffff',
+  color: theme.palette.text.primary,
   fontWeight: 700,
   fontSize: '1.2rem',
   marginBottom: theme.spacing(2),
@@ -142,7 +142,7 @@ const FooterTitle = styled(Typography)(({ theme }) => ({
     left: 0,
     width: '40px',
     height: '3px',
-    background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
+    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
     borderRadius: '2px',
   },
   [theme.breakpoints.down('md')]: {
@@ -155,7 +155,7 @@ const FooterTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const FooterLink = styled(Link)(({ theme }) => ({
-  color: '#94a3b8',
+  color: theme.palette.text.secondary,
   textDecoration: 'none',
   transition: 'all 0.3s ease',
   fontSize: '0.9rem',
@@ -163,7 +163,7 @@ const FooterLink = styled(Link)(({ theme }) => ({
   padding: theme.spacing(0.5, 0),
   position: 'relative',
   '&:hover': {
-    color: '#3b82f6',
+    color: theme.palette.primary.main,
     transform: 'translateX(8px)',
   },
   '&::before': {
@@ -172,7 +172,7 @@ const FooterLink = styled(Link)(({ theme }) => ({
     left: '-20px',
     opacity: 0,
     transition: 'all 0.3s ease',
-    color: '#3b82f6',
+    color: theme.palette.primary.main,
   },
   '&:hover::before': {
     opacity: 1,
@@ -199,14 +199,14 @@ const NewsletterSection = styled(Box)(({ theme }) => ({
 }));
 
 const NewsletterTitle = styled(Typography)(({ theme }) => ({
-  color: '#ffffff',
+  color: theme.palette.text.primary,
   fontWeight: 700,
   fontSize: '1.4rem',
   marginBottom: theme.spacing(1),
 }));
 
 const NewsletterDescription = styled(Typography)(({ theme }) => ({
-  color: '#cbd5e1',
+  color: theme.palette.text.secondary,
   fontSize: '0.95rem',
   lineHeight: 1.6,
   marginBottom: theme.spacing(3),
@@ -223,15 +223,15 @@ const NewsletterForm = styled(Box)(({ theme }) => ({
 }));
 
 const NewsletterButton = styled(Button)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-  color: 'white',
+  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+  color: '#ffffff',
   borderRadius: '25px',
   padding: theme.spacing(1.5, 3),
   fontWeight: 600,
   textTransform: 'none',
   transition: 'all 0.3s ease',
   '&:hover': {
-    background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
+    background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
     transform: 'translateY(-2px)',
     boxShadow: '0 6px 20px rgba(59, 130, 246, 0.4)',
   },
@@ -242,17 +242,17 @@ const ContactInfo = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   gap: theme.spacing(1.5),
   marginBottom: theme.spacing(1.5),
-  color: '#94a3b8',
+  color: theme.palette.text.secondary,
 }));
 
 const ContactIcon = styled(Box)(({ theme }) => ({
-  color: '#3b82f6',
+  color: theme.palette.primary.main,
   display: 'flex',
   alignItems: 'center',
 }));
 
 const Copyright = styled(Typography)(({ theme }) => ({
-  color: '#64748b',
+  color: theme.palette.text.secondary,
   fontSize: '0.9rem',
   textAlign: 'center',
   [theme.breakpoints.up('md')]: {

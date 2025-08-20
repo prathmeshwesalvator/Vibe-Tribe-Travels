@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   AppBar,
@@ -14,39 +14,47 @@ import {
   ListItemText,
   Box,
   Avatar,
-  useTheme,
-  useMediaQuery,
-  Slide,
-  Fade,
-  Grow,
+  Container,
   Divider,
-  Container
+  useMediaQuery,
+  useTheme,
+  Grow,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
   Home as HomeIcon,
   People as PeopleIcon,
   Public as PublicIcon,
-  Build as BuildIcon,
-  PhotoCamera as PhotoCameraIcon,
   ContactPhone as ContactPhoneIcon,
   Flight as FlightIcon,
-  Close as CloseIcon
+  Close as CloseIcon,
 } from '@mui/icons-material';
 import { styled, alpha } from '@mui/material/styles';
 import './Navbar.css';
 
-// Styled components
-const StyledAppBar = styled(AppBar)(({ theme, scrolled }) => ({
-  background: scrolled 
-    ? alpha(theme.palette.background.paper, 0.98)
-    : alpha(theme.palette.background.paper, 0.95),
-  backdropFilter: 'blur(20px)',
-  borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
-  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-  boxShadow: scrolled 
-    ? '0 10px 30px rgba(0, 0, 0, 0.3)'
-    : 'none',
+// Color system following the requested palette
+const COLORS = {
+  deepGreen: '#064e3b',
+  deepGreenScrolled: '#043b2d',
+  cream: '#fdf6e3',
+  oceanBlue: '#0077b6',
+  sunsetOrange: '#f97316',
+  palmGreen: '#2b7a0b',
+  white: '#ffffff',
+  black: '#000000',
+};
+
+// Logo path (place your logo file at public/logo.png or change this path)
+const LOGO_SRC = '/logo.png';
+
+// AppBar with deep green background and subtle scroll effect
+const StyledAppBar = styled(AppBar)(({ scrolled }) => ({
+  background: scrolled ? COLORS.deepGreenScrolled : COLORS.deepGreen,
+  color: COLORS.cream,
+  borderBottom: '1px solid rgba(255,255,255,0.08)',
+  boxShadow: scrolled ? '0 10px 30px rgba(0, 0, 0, 0.3)' : 'none',
+  transition: 'all 300ms ease',
+  zIndex: 1200,
 }));
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
@@ -59,31 +67,35 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 const BrandContainer = styled(Link)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  gap: theme.spacing(1.5),
+  gap: theme.spacing(1.25),
   textDecoration: 'none',
-  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  '&:hover': {
-    transform: 'scale(1.02)',
+  '&:focus-visible': {
+    outline: `3px solid ${alpha(COLORS.oceanBlue, 0.7)}`,
+    outlineOffset: 2,
   },
 }));
 
 const LogoAvatar = styled(Avatar)(({ theme }) => ({
-  width: 60,
-  height: 60,
-  background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-  boxShadow: '0 4px 20px rgba(59, 130, 246, 0.4)',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  '&:hover': {
-    transform: 'scale(1.1) rotate(5deg)',
-    boxShadow: '0 8px 30px rgba(59, 130, 246, 0.6)',
+  width: 64,
+  height: 64,
+  backgroundColor: COLORS.white,
+  boxShadow: '0 6px 18px rgba(0,0,0,0.18)',
+  transition: 'transform 250ms ease, box-shadow 250ms ease',
+  '& .MuiAvatar-img': {
+    objectFit: 'contain',
+    transform: 'scale(1.12)',
+    padding: theme.spacing(0.75),
   },
-  [theme.breakpoints.down('md')]: {
-    width: 50,
-    height: 50,
+  '&:hover': {
+    transform: 'scale(1.06)',
+    boxShadow: '0 10px 28px rgba(0,0,0,0.22)',
   },
   [theme.breakpoints.down('sm')]: {
-    width: 45,
-    height: 45,
+    width: 56,
+    height: 56,
+    '& .MuiAvatar-img': {
+      padding: theme.spacing(0.5),
+    },
   },
 }));
 
@@ -94,82 +106,80 @@ const BrandText = styled(Box)(({ theme }) => ({
 }));
 
 const BrandPrimary = styled(Typography)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  backgroundClip: 'text',
+  color: COLORS.cream,
   fontWeight: 800,
-  fontSize: '1.6rem',
-  letterSpacing: '-0.5px',
-  [theme.breakpoints.down('md')]: {
-    fontSize: '1.4rem',
-  },
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '1.2rem',
-  },
+  fontSize: '1.5rem',
+  letterSpacing: '-0.3px',
+  [theme.breakpoints.down('sm')]: { fontSize: '1.2rem' },
 }));
 
 const BrandSecondary = styled(Typography)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  backgroundClip: 'text',
+  color: COLORS.cream,
   fontWeight: 600,
-  fontSize: '1.1rem',
-  letterSpacing: '1px',
-  [theme.breakpoints.down('md')]: {
-    fontSize: '1rem',
-  },
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '0.9rem',
-  },
+  fontSize: '1rem',
+  letterSpacing: '0.8px',
+  opacity: 0.9,
+  [theme.breakpoints.down('sm')]: { fontSize: '0.9rem' },
 }));
 
-const NavButton = styled(Button)(({ theme, active }) => ({
-  color: active ? theme.palette.primary.main : theme.palette.text.primary,
-  backgroundColor: active ? alpha(theme.palette.primary.main, 0.1) : 'transparent',
-  borderRadius: '25px',
-  padding: theme.spacing(1, 2),
-  margin: theme.spacing(0, 0.5),
-  textTransform: 'none',
-  fontWeight: 500,
-  fontSize: '0.95rem',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  border: active ? `1px solid ${alpha(theme.palette.primary.main, 0.3)}` : '1px solid transparent',
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.1),
-    transform: 'translateY(-2px)',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-  },
-  '& .MuiButton-startIcon': {
-    marginRight: theme.spacing(1),
-    transition: 'all 0.3s ease',
-  },
-  '&:hover .MuiButton-startIcon': {
-    transform: 'scale(1.1) rotate(5deg)',
-  },
-  [theme.breakpoints.down('lg')]: {
-    padding: theme.spacing(0.75, 1.5),
-    fontSize: '0.9rem',
-  },
-}));
+// Desktop navigation button
+const NavButton = styled(Button)(({ theme, active, variantcolor }) => {
+  const baseColor = variantcolor === 'secondary' ? COLORS.sunsetOrange : COLORS.oceanBlue;
+  return ({
+    color: active ? COLORS.black : COLORS.cream,
+    backgroundColor: active ? COLORS.white : 'transparent',
+    border: active ? `1px solid ${alpha(baseColor, 0.4)}` : '1px solid transparent',
+    borderRadius: 24,
+    padding: theme.spacing(1, 2),
+    margin: theme.spacing(0, 0.5),
+    textTransform: 'none',
+    fontWeight: 600,
+    fontSize: '0.95rem',
+    transition: 'all 200ms ease',
+    '&:hover': {
+      backgroundColor: COLORS.white,
+      color: COLORS.black,
+      transform: 'translateY(-2px)',
+      boxShadow: '0 6px 18px rgba(0,0,0,0.18)',
+      borderColor: alpha(baseColor, 0.45),
+    },
+    '&:active': {
+      backgroundColor: COLORS.white,
+      color: COLORS.black,
+      transform: 'translateY(0)',
+      boxShadow: '0 3px 10px rgba(0,0,0,0.16)',
+      borderColor: alpha(baseColor, 0.5),
+    },
+    '&:focus-visible': {
+      outline: `3px solid ${alpha(baseColor, 0.7)}`,
+      outlineOffset: 2,
+    },
+    '& .MuiButton-startIcon': {
+      marginRight: theme.spacing(1),
+      color: active ? baseColor : alpha(baseColor, 0.95),
+      transition: 'transform 200ms ease, color 200ms ease',
+    },
+    '&:hover .MuiButton-startIcon': {
+      transform: 'scale(1.1) rotate(5deg)',
+      color: baseColor,
+    },
+  });
+});
 
+// Mobile drawer
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
   '& .MuiDrawer-paper': {
     width: '100%',
-    maxWidth: 400,
-    background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-    backdropFilter: 'blur(20px)',
-    borderLeft: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
-    [theme.breakpoints.down('sm')]: {
-      maxWidth: '100%',
-    },
+    maxWidth: 380,
+    background: COLORS.deepGreen,
+    color: COLORS.cream,
+    borderLeft: '1px solid rgba(255,255,255,0.08)',
   },
 }));
 
 const MobileHeader = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(3, 2, 1),
-  borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
+  padding: theme.spacing(2.5, 2, 1),
+  borderBottom: '1px solid rgba(255,255,255,0.08)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -178,42 +188,58 @@ const MobileHeader = styled(Box)(({ theme }) => ({
 const MobileBrand = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  gap: theme.spacing(1.5),
-  color: theme.palette.text.primary,
+  gap: theme.spacing(1.25),
+  color: COLORS.cream,
 }));
 
 const MobileLogo = styled(Avatar)(({ theme }) => ({
-  width: 50,
-  height: 50,
-  background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+  width: 56,
+  height: 56,
+  backgroundColor: COLORS.white,
+  boxShadow: '0 4px 14px rgba(0,0,0,0.16)',
+  '& .MuiAvatar-img': {
+    objectFit: 'contain',
+    transform: 'scale(1.12)',
+    padding: theme.spacing(0.5),
+  },
 }));
 
-const MobileNavItem = styled(ListItem)(({ theme }) => ({
-  padding: 0,
-  margin: 0,
-}));
+const MobileNavItem = styled(ListItem)(() => ({ padding: 0, margin: 0 }));
 
-const MobileNavButton = styled(ListItemButton)(({ theme, active }) => ({
-  padding: theme.spacing(1.5, 2),
-  margin: theme.spacing(0.25, 0),
-  borderRadius: theme.spacing(1),
-  borderLeft: `3px solid ${active ? theme.palette.primary.main : 'transparent'}`,
-  backgroundColor: active ? alpha(theme.palette.primary.main, 0.1) : 'transparent',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.1),
-    transform: 'translateX(10px)',
-    borderLeftColor: theme.palette.primary.main,
-  },
-  '& .MuiListItemIcon-root': {
-    minWidth: 40,
-    color: active ? theme.palette.primary.main : theme.palette.text.secondary,
-  },
-  '& .MuiListItemText-primary': {
-    fontWeight: 500,
-    fontSize: '1.1rem',
-  },
-}));
+const MobileNavButton = styled(ListItemButton)(({ theme, active, variantcolor }) => {
+  const baseColor = variantcolor === 'secondary' ? COLORS.sunsetOrange : COLORS.oceanBlue;
+  return ({
+    padding: theme.spacing(1.5, 2),
+    margin: theme.spacing(0.25, 0),
+    borderRadius: theme.spacing(1),
+    borderLeft: `3px solid ${active ? baseColor : 'transparent'}`,
+    backgroundColor: active ? alpha(COLORS.white, 0.95) : 'transparent',
+    transition: 'all 200ms ease',
+    '&:hover': {
+      backgroundColor: alpha(COLORS.white, 0.95),
+      transform: 'translateX(8px)',
+      borderLeftColor: baseColor,
+    },
+    '&:active': {
+      backgroundColor: alpha(COLORS.white, 0.98),
+      transform: 'translateX(4px)',
+      borderLeftColor: baseColor,
+    },
+    '&:focus-visible': {
+      outline: `3px solid ${alpha(baseColor, 0.7)}`,
+      outlineOffset: 2,
+    },
+    '& .MuiListItemIcon-root': {
+      minWidth: 40,
+      color: active ? baseColor : alpha(baseColor, 0.9),
+    },
+    '& .MuiListItemText-primary': {
+      fontWeight: 600,
+      fontSize: '1.05rem',
+      color: active ? COLORS.black : COLORS.cream,
+    },
+  });
+});
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -223,21 +249,13 @@ const Navbar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 56);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const closeDrawer = () => {
-    setMobileOpen(false);
-  };
+  const handleDrawerToggle = () => setMobileOpen((prev) => !prev);
+  const closeDrawer = () => setMobileOpen(false);
 
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
@@ -246,64 +264,55 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { path: '/', label: 'Home', icon: <HomeIcon /> },
-    { path: '/about', label: 'About Us', icon: <PeopleIcon /> },
-    { path: '/destinations', label: 'Destinations', icon: <PublicIcon /> },
-    // { path: '/services', label: 'Services', icon: <BuildIcon /> },
-    { path: '/gallery', label: 'Gallery', icon: <PhotoCameraIcon /> },
-    { path: '/contact', label: 'Contact', icon: <ContactPhoneIcon /> }
+    { path: '/', label: 'Home', icon: <HomeIcon />, variant: 'primary' },
+    { path: '/about', label: 'About Us', icon: <PeopleIcon />, variant: 'primary' },
+    { path: '/destinations', label: 'Destinations', icon: <PublicIcon />, variant: 'primary' },
+    { path: '/contact', label: 'Contact Us', icon: <ContactPhoneIcon />, variant: 'secondary' },
   ];
 
   const drawer = (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <MobileHeader>
         <MobileBrand>
-          <MobileLogo>
+          <MobileLogo src={LOGO_SRC} alt="Vibe Tribe Travels logo">
             <FlightIcon />
           </MobileLogo>
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
             Vibe Tribe Travels
           </Typography>
         </MobileBrand>
-        <IconButton
-          onClick={closeDrawer}
-          sx={{ color: 'text.primary' }}
-        >
+        <IconButton aria-label="Close menu" onClick={closeDrawer} sx={{ color: COLORS.cream }}>
           <CloseIcon />
         </IconButton>
       </MobileHeader>
-      
+
       <Divider />
-      
+
       <List sx={{ flex: 1, py: 1 }}>
         {navItems.map((item, index) => (
-          <MobileNavItem key={item.path}>
-            <MobileNavButton
-              component={Link}
-              to={item.path}
-              onClick={closeDrawer}
-              active={isActive(item.path) ? 1 : 0}
-              sx={{
-                animationDelay: `${index * 0.1}s`,
-                animation: 'slideInRight 0.5s ease-out forwards',
-                opacity: 0,
-                transform: 'translateX(30px)',
-              }}
-            >
-              <ListItemIcon>
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.label} />
-            </MobileNavButton>
-          </MobileNavItem>
+          <Grow in key={item.path} style={{ transformOrigin: 'right', transitionDelay: `${index * 80}ms` }}>
+            <MobileNavItem>
+              <MobileNavButton
+                component={Link}
+                to={item.path}
+                onClick={closeDrawer}
+                active={isActive(item.path) ? 1 : 0}
+                variantcolor={item.variant}
+                aria-current={isActive(item.path) ? 'page' : undefined}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.label} />
+              </MobileNavButton>
+            </MobileNavItem>
+          </Grow>
         ))}
       </List>
-      
+
       <Divider />
-      
-      <Box sx={{ p: 2, textAlign: 'center' }}>
-        <Typography variant="body2" color="text.secondary">
-          Follow us on social media
+
+      <Box sx={{ p: 2, textAlign: 'center', opacity: 0.85 }}>
+        <Typography variant="body2" color={COLORS.cream}>
+          Explore. Dream. Discover.
         </Typography>
       </Box>
     </Box>
@@ -314,10 +323,9 @@ const Navbar = () => {
       <StyledAppBar position="fixed" scrolled={isScrolled ? 1 : 0}>
         <Container maxWidth="xl">
           <StyledToolbar>
-            {/* Brand/Logo */}
-            <BrandContainer to="/" onClick={closeDrawer}>
-              <LogoAvatar>
-                <FlightIcon sx={{ fontSize: '2.2rem' }} />
+            <BrandContainer to="/" aria-label="Home">
+              <LogoAvatar src={LOGO_SRC} alt="Vibe Tribe Travels logo">
+                <FlightIcon sx={{ fontSize: '2rem', color: COLORS.cream }} />
               </LogoAvatar>
               <BrandText>
                 <BrandPrimary>Vibe Tribe</BrandPrimary>
@@ -325,22 +333,18 @@ const Navbar = () => {
               </BrandText>
             </BrandContainer>
 
-            {/* Desktop Navigation */}
             {!isMobile && (
-              <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+              <Box role="navigation" aria-label="Primary" sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
                 {navItems.map((item, index) => (
-                  <Grow
-                    key={item.path}
-                    in={true}
-                    timeout={600}
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
+                  <Grow in key={item.path} timeout={600} style={{ transitionDelay: `${index * 90}ms` }}>
                     <Box>
                       <NavButton
                         component={Link}
                         to={item.path}
                         startIcon={item.icon}
                         active={isActive(item.path) ? 1 : 0}
+                        variantcolor={item.variant}
+                        aria-current={isActive(item.path) ? 'page' : undefined}
                       >
                         {item.label}
                       </NavButton>
@@ -350,14 +354,12 @@ const Navbar = () => {
               </Box>
             )}
 
-            {/* Mobile Menu Button */}
             {isMobile && (
               <IconButton
-                color="inherit"
-                aria-label="open drawer"
+                aria-label="Open menu"
                 edge="end"
                 onClick={handleDrawerToggle}
-                sx={{ ml: 'auto' }}
+                sx={{ ml: 'auto', color: COLORS.cream }}
               >
                 <MenuIcon />
               </IconButton>
@@ -366,27 +368,21 @@ const Navbar = () => {
         </Container>
       </StyledAppBar>
 
-      {/* Mobile Navigation Drawer */}
       <StyledDrawer
         variant="temporary"
         anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box' },
-        }}
+        ModalProps={{ keepMounted: true }}
+        sx={{ display: { xs: 'block', md: 'none' }, '& .MuiDrawer-paper': { boxSizing: 'border-box' } }}
       >
         {drawer}
       </StyledDrawer>
 
-      {/* Toolbar spacer */}
-      <Toolbar />
     </>
   );
 };
 
-export default Navbar; 
+export default Navbar;
+
+

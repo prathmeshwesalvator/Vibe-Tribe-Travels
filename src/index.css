@@ -9,6 +9,51 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  /* Primary brand colors (light theme: blue/purple) */
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
+  --color-secondary: #8b5cf6;
+  --color-secondary-dark: #7c3aed;
+
+  /* Text colors */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+
+  /* Background colors */
+  --bg-default: #f8fafc;
+  --bg-paper: #ffffff;
+  --bg-dark-1: #0f172a;
+  --bg-dark-2: #1e293b;
+  --bg-dark-3: #334155;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --gradient-primary-90: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  --gradient-dark: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 100%);
+}
+
+/* Forest theme override */
+[data-theme="forest"] {
+  --color-primary: #2e7d32; /* green 800 */
+  --color-primary-dark: #1b5e20; /* green 900 */
+  --color-secondary: #66bb6a; /* green 400 */
+  --color-secondary-dark: #43a047; /* green 600 */
+
+  --text-primary: #0b2618; /* deep forest */
+  --text-secondary: #406a52; /* muted moss */
+
+  --bg-default: #f3fbf6; /* very light green tint */
+  --bg-paper: #e8f3ec; /* light card surface */
+  --bg-dark-1: #0d1f16; /* deep forest shadow */
+  --bg-dark-2: #163a2a; /* forest pine */
+  --bg-dark-3: #1f4d3a; /* moss */
+
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --gradient-primary-90: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  --gradient-dark: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 100%);
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
@@ -40,17 +85,17 @@ img {
 
 /* Focus styles for accessibility */
 *:focus {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
 /* Selection styles */
 ::selection {
-  background-color: #2563eb;
-  color: white;
+  background-color: var(--color-primary);
+  color: #ffffff;
 }
 
 ::-moz-selection {
-  background-color: #2563eb;
-  color: white;
+  background-color: var(--color-primary);
+  color: #ffffff;
 }
