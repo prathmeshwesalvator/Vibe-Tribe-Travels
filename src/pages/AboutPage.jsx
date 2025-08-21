@@ -176,7 +176,15 @@ const AnimatedSection = ({ children, backgroundColor, sx = {} }) => {
 
 const HeroSection = ({ isMobile }) => {
   return (
-    <Box sx={{ position: "relative", minHeight: isMobile ? 420 : 520, background: "#FDF6EC", pb: 8 }}>
+    <Box
+      sx={{
+        position: "relative",
+        minHeight: isMobile ? 420 : 520,
+        background: "#FDF6EC",
+        pb: 8,
+        pt: { xs: 10, sm: 12, md: 14 }, // <-- Add this line for top padding
+      }}
+    >
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <Grid container spacing={6} alignItems="center" justifyContent="center">
           <Grid item xs={12} md={6}>
@@ -203,13 +211,16 @@ const HeroSection = ({ isMobile }) => {
                 We're a team of passionate explorers dedicated to creating meaningful journeys that connect people with the world's most incredible destinations.
               </Typography>
               <Box sx={{ display: "flex", gap: 2, flexWrap: isMobile ? "wrap" : "nowrap" }}>
-                <PrimaryButton>
+
+                {/* <PrimaryButton>
                   Explore Our Journeys
                   <ArrowForward />
-                </PrimaryButton>
-                <SecondaryButton>
+                </PrimaryButton> */}
+
+
+                <PrimaryButton>
                   Learn More
-                </SecondaryButton>
+                </PrimaryButton>
               </Box>
             </motion.div>
           </Grid>
@@ -303,6 +314,8 @@ const AboutUsPage = () => {
         {/* --- HERO SECTION --- */}
         <HeroSection isMobile={isMobile} />
 
+        
+
         {/* Mission Section */}
         <AnimatedSection backgroundColor="#FDF6EC">
           <Container maxWidth="lg">
@@ -325,29 +338,39 @@ const AboutUsPage = () => {
               </Typography>
             </Box>
 
-            <Grid container spacing={4}>
+            {/* Changed here: Use Box with flex and wrap for value cards */}
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 4,
+                justifyContent: 'center',
+                alignItems: 'stretch',
+                mb: 2,
+              }}
+            >
               {values.map((value, index) => (
-                <Grid item xs={12} sm={6} md={3} key={index}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <ValueCard>
-                      <ValueIconWrapper className="value-icon">
-                        {value.icon}
-                      </ValueIconWrapper>
-                      <Typography variant="h5" component="h3" gutterBottom color="#0B3D2E" fontWeight="600">
-                        {value.title}
-                      </Typography>
-                      <Typography variant="body2" color="#333333" sx={{ opacity: 0.8, lineHeight: 1.6 }}>
-                        {value.description}
-                      </Typography>
-                    </ValueCard>
-                  </motion.div>
-                </Grid>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  style={{ flex: '1 1 220px', maxWidth: 320, minWidth: 220, display: 'flex' }}
+                >
+                  <ValueCard sx={{ width: '100%' }}>
+                    <ValueIconWrapper className="value-icon">
+                      {value.icon}
+                    </ValueIconWrapper>
+                    <Typography variant="h5" component="h3" gutterBottom color="#0B3D2E" fontWeight="600">
+                      {value.title}
+                    </Typography>
+                    <Typography variant="body2" color="#333333" sx={{ opacity: 0.8, lineHeight: 1.6 }}>
+                      {value.description}
+                    </Typography>
+                  </ValueCard>
+                </motion.div>
               ))}
-            </Grid>
+            </Box>
           </Container>
         </AnimatedSection>
 
@@ -381,10 +404,13 @@ const AboutUsPage = () => {
                   <Typography variant="body1" paragraph sx={{ color: '#333333', fontSize: '1.1rem', lineHeight: 1.7 }}>
                     Today, we partner with local guides and communities in over 30 countries to create journeys that benefit both travelers and the places they visit. Our commitment to sustainable tourism has never been stronger.
                   </Typography>
-                  <PrimaryButton sx={{ mt: 2 }}>
+
+                  {/* <PrimaryButton sx={{ mt: 2 }}>
                     Read Our Full Story
                     <ArrowForward />
-                  </PrimaryButton>
+                  </PrimaryButton> */}
+
+
                 </motion.div>
               </Grid>
               <Grid item xs={12} md={6}>
