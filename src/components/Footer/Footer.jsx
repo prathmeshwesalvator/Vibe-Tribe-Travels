@@ -21,7 +21,7 @@ import {
   Flight as FlightIcon,
   Facebook as FacebookIcon,
   Instagram as InstagramIcon,
-  Twitter as TwitterIcon,
+  WhatsApp as WhatsappIcon,
   LinkedIn as LinkedInIcon,
   YouTube as YouTubeIcon,
   Email as EmailIcon,
@@ -262,10 +262,10 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: <FacebookIcon />, label: 'Facebook', url: '#', color: '#1877f2' },
-    { icon: <InstagramIcon />, label: 'Instagram', url: '#', color: '#e4405f' },
-    { icon: <TwitterIcon />, label: 'Twitter', url: '#', color: '#1da1f2' },
+    { icon: <InstagramIcon />, label: 'Instagram', url: 'https://www.instagram.com/vibetribetravels?igsh=MWM5cXZ6cGExenJmMA==', color: '#e4405f' },
+    { icon: <WhatsappIcon />, label: 'Whatsapp', url: 'https://wa.me/919309898602', color: '#25D366' },
     { icon: <LinkedInIcon />, label: 'LinkedIn', url: '#', color: '#0077b5' },
-    { icon: <YouTubeIcon />, label: 'YouTube', url: '#', color: '#ff0000' }
+    // { icon: <YouTubeIcon />, label: 'YouTube', url: '#', color: '#ff0000' }
   ];
 
   return (
@@ -399,6 +399,25 @@ const Footer = () => {
                 </Box>
               </Grow>
             </Grid>
+
+
+                              {/* --- Add Google Map Embed Below --- */}
+               <Box>
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15072.933005105995!2d73.193951!3d19.185012000000004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7938359bbd3a5%3A0x185ca7bca88f0c9!2sAmbernath%2C%20Maharashtra%2C%20India!5e0!3m2!1sen!2sus!4v1755800947694!5m2!1sen!2sus" 
+    width="100%"
+    height="450"
+    style={{ border: 0 }}
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+    title="Google Maps - Ambernath, Maharashtra, India"
+  />
+</Box>
+                  {/* --- End Google Map Embed --- */}
+
+
+
           </Grid>
         </Container>
       </FooterMain>

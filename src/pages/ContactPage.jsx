@@ -93,7 +93,7 @@ const ContactPage = () => {
   return (
     <div className="contact-page">
       {/* Hero Section */}
-      <section className="page-hero">
+      <section className="page-hero" style={{ paddingTop: "5.5rem" }}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
