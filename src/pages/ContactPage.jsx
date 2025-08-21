@@ -26,33 +26,29 @@ const contactMethods = [
     icon: "📧",
     title: "Email",
     value: (
-      <a href="mailto:hello@vibetribetravels.com" style={{ color: "#3b82f6", textDecoration: "underline" }}>
+      <a href="mailto:hello@vibetribetravels.com" className="contact-link">
         hello@vibetribetravels.com
       </a>
     ),
-    color: "#3b82f6",
   },
   {
     icon: "📞",
     title: "Phone",
     value: (
-      <a href="tel:+15551234567" style={{ color: "#10b981", textDecoration: "underline" }}>
+      <a href="tel:+15551234567" className="contact-link">
         +1 (555) 123-4567
       </a>
     ),
-    color: "#10b981",
   },
   {
     icon: "📍",
     title: "Office",
     value: "123 Travel Street, Adventure City, AC 12345",
-    color: "#8b5cf6",
   },
   {
     icon: "⏰",
     title: "Business Hours",
     value: "Mon-Fri: 9AM-6PM EST",
-    color: "#f59e0b",
   },
 ];
 
@@ -149,11 +145,11 @@ const ContactPage = () => {
                 <span role="img" aria-label="compass">
                   🧭
                 </span>{" "}
-                Let’s Start Planning
+                Let's Start Planning
               </h3>
               <p>
-                Whether it's a romantic getaway, family adventure, or solo exploration –{" "}
-                we’ll make sure every detail is perfect. Reach out and let us craft your next journey!
+                Whether it's a romantic getaway, family adventure, or solo exploration -{" "}
+                we'll make sure every detail is perfect. Reach out and let us craft your next journey!
               </p>
 
               <div className="contact-methods">
@@ -161,7 +157,6 @@ const ContactPage = () => {
                   <motion.div
                     key={index}
                     className="contact-method"
-                    style={{ borderLeft: `4px solid ${method.color}` }}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * index, duration: 0.5 }}
@@ -197,23 +192,14 @@ const ContactPage = () => {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
-                  style={{
-                    background: "#e0f2fe",
-                    borderRadius: "12px",
-                    padding: "2rem",
-                    textAlign: "center",
-                    color: "#2563eb",
-                    marginBottom: "1.5rem",
-                  }}
                 >
-                  <div style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>🎉</div>
+                  <div className="success-icon">🎉</div>
                   <h4>Thank you for reaching out!</h4>
                   <p>
-                    We’ve received your message and will get back to you as soon as possible.
+                    We've received your message and will get back to you as soon as possible.
                   </p>
                   <button
-                    className="btn-submit"
-                    style={{ marginTop: "1rem", background: "#3b82f6" }}
+                    className="btn-submit secondary"
                     onClick={() => setSubmitted(false)}
                   >
                     Send Another Message
@@ -283,24 +269,10 @@ const ContactPage = () => {
                     type="submit"
                     className="btn-submit"
                     disabled={submitting}
-                    style={submitting ? { opacity: 0.7, cursor: "not-allowed" } : {}}
                   >
                     {submitting ? (
                       <span>
-                        <span
-                          className="spinner"
-                          style={{
-                            display: "inline-block",
-                            width: "1.2em",
-                            height: "1.2em",
-                            border: "3px solid #fff",
-                            borderTop: "3px solid #3b82f6",
-                            borderRadius: "50%",
-                            animation: "spin 1s linear infinite",
-                            marginRight: "0.5em",
-                            verticalAlign: "middle",
-                          }}
-                        ></span>
+                        <span className="spinner"></span>
                         Sending...
                       </span>
                     ) : (
@@ -315,15 +287,6 @@ const ContactPage = () => {
           </div>
         </div>
       </section>
-      {/* Spinner animation keyframes */}
-      <style>
-        {`
-          @keyframes spin {
-            0% { transform: rotate(0deg);}
-            100% { transform: rotate(360deg);}
-          }
-        `}
-      </style>
     </div>
   );
 };
