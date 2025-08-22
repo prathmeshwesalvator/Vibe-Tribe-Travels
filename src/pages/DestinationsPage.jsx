@@ -665,15 +665,41 @@ const DestinationsPage = () => {
             </Button>
           </Box>
 
-          <Grid container spacing={3} sx={{ display : 'flex' , alignItems: 'center' , flexWrap: 'wrap'}}>
-            {featuredDestinations.map((destination) => (
-              <Grid item xs={12} md={6} key={destination.id} sx={{ width: '30%'}}>
-                <ScrollAnimation threshold={0.2}>
-                  {renderDestinationCard(destination, true)}
-                </ScrollAnimation>
-              </Grid>
-            ))}
-          </Grid>
+<Grid 
+  container 
+  spacing={3} 
+  display="flex"
+  flexWrap="wrap"   
+>
+  {featuredDestinations.map((destination) => (
+    <Grid 
+      item 
+      xs={12} 
+      sm={6} 
+      md={3}   // 4 per row on desktop
+      key={destination.id} 
+      sx={{ display: 'flex' }}
+      width= '350px'
+    >
+      <ScrollAnimation 
+        threshold={0.2} 
+        style={{ width: '100%', display: 'flex', height: 380 }} // fixed height
+      >
+        {renderDestinationCard(destination, {
+          sx: {
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',   // stretch to uniform height
+          },
+        })}
+      </ScrollAnimation>
+    </Grid>
+  ))}
+</Grid>
+
+
+
         </Container>
 
         {/* All Destinations Section */}
@@ -695,23 +721,27 @@ const DestinationsPage = () => {
 <Grid 
   container 
   spacing={3} 
-  sx={{ display: 'flex', alignItems: 'stretch', flexWrap: 'wrap' }}
+  display="flex"
+  flexWrap="wrap"
 >
   {otherDestinations.map((destination) => (
     <Grid 
       item 
-      xs={12} sm={6} md={3} // 4 per row on md+
+      xs={12} 
+      sm={6} 
+      md={3}   // 4 per row on desktop
       key={destination.id} 
-      sx={{ display: 'flex' , width :'30%' }}
+      sx={{ display: 'flex' }}
+      width="350px"
     >
       <ScrollAnimation 
         threshold={0.2} 
-        style={{ width: '100%', height: '380px', display: 'flex' }}
+        style={{ width: '100%', height: 380, display: 'flex' }} // fixed height
       >
         <Box
           sx={{
             width: '100%',
-            height: '380px',
+            height: '100%',  // ensures uniform height
             display: 'flex',
             flexDirection: 'column',
           }}
@@ -720,7 +750,7 @@ const DestinationsPage = () => {
             sx: {
               flex: 1,
               display: 'flex',
-              // flexDirection: 'column',
+              flexDirection: 'column',
               height: '100%',
             },
           })}
@@ -729,9 +759,6 @@ const DestinationsPage = () => {
     </Grid>
   ))}
 </Grid>
-
-
-
 
 
 
