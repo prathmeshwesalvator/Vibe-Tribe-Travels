@@ -161,7 +161,7 @@ const Destinations = () => {
             alignItems="stretch"
             justifyContent="center"
             sx={{
-              flexWrap: 'nowrap',
+              flexWrap: 'wrap',
               overflowX: 'auto',
               width: '100%',
               px: { xs: 2, md: 6 },

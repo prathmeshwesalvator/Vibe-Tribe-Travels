@@ -264,7 +264,7 @@ const Footer = () => {
     { icon: <FacebookIcon />, label: 'Facebook', url: '#', color: '#1877f2' },
     { icon: <InstagramIcon />, label: 'Instagram', url: 'https://www.instagram.com/vibetribetravels?igsh=MWM5cXZ6cGExenJmMA==', color: '#e4405f' },
     { icon: <WhatsappIcon />, label: 'Whatsapp', url: 'https://wa.me/919309898602', color: '#25D366' },
-    { icon: <LinkedInIcon />, label: 'LinkedIn', url: '#', color: '#0077b5' },
+    // { icon: <LinkedInIcon />, label: 'LinkedIn', url: '#', color: '#0077b5' },
     // { icon: <YouTubeIcon />, label: 'YouTube', url: '#', color: '#ff0000' }
   ];
 
