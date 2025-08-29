@@ -268,6 +268,7 @@ const Navbar = () => {
     { path: '/about', label: 'About Us', icon: <PeopleIcon />, variant: 'primary' },
     { path: '/destinations', label: 'Destinations', icon: <PublicIcon />, variant: 'primary' },
     { path: '/contact', label: 'Contact Us', icon: <ContactPhoneIcon />, variant: 'secondary' },
+    { path: '/terms-conditions', label: 'Terms & Conditions', icon: <FlightIcon />, variant: 'secondary' },
   ];
 
   const drawer = (
