@@ -16,9 +16,9 @@ import {
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import DestinationsPage from './pages/DestinationsPage';
-import ServicesPage from './pages/ServicesPage';
 import GalleryPage from './pages/GalleryPage';
 import ContactPage from './pages/ContactPage';
+import TermsAndConditionsPage from './pages/TermsPage';
 
 function App() {
   React.useEffect(() => {
@@ -38,7 +38,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/destinations" element={<DestinationsPage />} />
-            {/* <Route path="/services" element={<ServicesPage />} /> */}
+            <Route path="/terms-conditions" element={<TermsAndConditionsPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>

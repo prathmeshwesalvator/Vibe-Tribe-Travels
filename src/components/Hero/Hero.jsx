@@ -25,6 +25,14 @@ import {
   Explore as ExploreIcon,
   Public as PublicIcon,
   KeyboardArrowDown as KeyboardArrowDownIcon,
+  Restaurant as RestaurantIcon,
+  LocalBar as LocalBarIcon,
+  Pool as PoolIcon,
+  Map as MapIcon,
+  WbSunny as WbSunnyIcon,
+  Surfing as SurfingIcon,
+  Sailing as SailingIcon,
+  Hiking as HikingIcon,
 } from '@mui/icons-material';
 import { styled, alpha } from '@mui/material/styles';
 import './Hero.css';
@@ -248,16 +256,39 @@ const Hero = () => {
     { label: '4.9/5 Average Rating', color: PALETTE.sunsetOrange },
     { label: '24/7 Travel Support', color: PALETTE.palmGreen },
   ];
+const particles = [
+  { Icon: FlightTakeoffIcon, size: 42, color: PALETTE.oceanBlue, top: '8%', left: '5%', dx: 35, dy: 20, rot: '10deg', duration: '14s' },
+  { Icon: LuggageIcon, size: 36, color: PALETTE.sunsetOrange, top: '15%', left: '90%', dx: 30, dy: 18, rot: '-8deg', duration: '16s' },
+  { Icon: BeachAccessIcon, size: 38, color: PALETTE.palmGreen, top: '75%', left: '8%', dx: 32, dy: 22, rot: '12deg', duration: '13s' },
+  { Icon: DirectionsBoatIcon, size: 44, color: PALETTE.oceanBlue, top: '12%', left: '52%', dx: 40, dy: 25, rot: '-10deg', duration: '18s' },
+  { Icon: CameraAltIcon, size: 34, color: PALETTE.sunsetOrange, top: '82%', left: '42%', dx: 28, dy: 16, rot: '7deg', duration: '15s' },
+  { Icon: TerrainIcon, size: 40, color: PALETTE.palmGreen, top: '35%', left: '15%', dx: 36, dy: 20, rot: '-12deg', duration: '17s' },
+  { Icon: HotelIcon, size: 32, color: PALETTE.sunsetOrange, top: '48%', left: '88%', dx: 26, dy: 15, rot: '9deg', duration: '14s' },
+  { Icon: RestaurantIcon, size: 36, color: PALETTE.oceanBlue, top: '62%', left: '78%', dx: 34, dy: 19, rot: '-11deg', duration: '16s' },
+  { Icon: LocalBarIcon, size: 30, color: PALETTE.sunsetOrange, top: '22%', left: '22%', dx: 24, dy: 14, rot: '8deg', duration: '13s' },
+  { Icon: PoolIcon, size: 38, color: PALETTE.palmGreen, top: '85%', left: '82%', dx: 38, dy: 21, rot: '-9deg', duration: '15s' },
+  { Icon: MapIcon, size: 34, color: PALETTE.oceanBlue, top: '28%', left: '68%', dx: 30, dy: 17, rot: '11deg', duration: '14s' },
+  { Icon: WbSunnyIcon, size: 42, color: PALETTE.sunsetOrange, top: '58%', left: '10%', dx: 42, dy: 24, rot: '-13deg', duration: '17s' },
+  { Icon: SurfingIcon, size: 36, color: PALETTE.palmGreen, top: '25%', left: '48%', dx: 32, dy: 18, rot: '10deg', duration: '16s' },
+  { Icon: HikingIcon, size: 40, color: PALETTE.oceanBlue, top: '72%', left: '32%', dx: 36, dy: 20, rot: '-8deg', duration: '15s' },
+  { Icon: SailingIcon, size: 38, color: PALETTE.sunsetOrange, top: '18%', left: '75%', dx: 34, dy: 19, rot: '12deg', duration: '14s' },
+  { Icon: ExploreIcon, size: 32, color: PALETTE.palmGreen, top: '88%', left: '25%', dx: 28, dy: 16, rot: '-10deg', duration: '16s' },
+  { Icon: PublicIcon, size: 44, color: PALETTE.oceanBlue, top: '5%', left: '60%', dx: 44, dy: 26, rot: '9deg', duration: '18s' },
+  { Icon: KeyboardArrowDownIcon, size: 28, color: PALETTE.sunsetOrange, top: '38%', left: '8%', dx: 22, dy: 12, rot: '-7deg', duration: '13s' },
+  { Icon: FlightTakeoffIcon, size: 36, color: PALETTE.palmGreen, top: '65%', left: '92%', dx: 32, dy: 18, rot: '11deg', duration: '15s' },
+  { Icon: DirectionsBoatIcon, size: 40, color: PALETTE.oceanBlue, top: '20%', left: '38%', dx: 36, dy: 20, rot: '-9deg', duration: '17s' },
+  { Icon: CameraAltIcon, size: 34, color: PALETTE.sunsetOrange, top: '78%', left: '55%', dx: 30, dy: 17, rot: '8deg', duration: '14s' },
+  { Icon: TerrainIcon, size: 42, color: PALETTE.palmGreen, top: '52%', left: '85%', dx: 40, dy: 23, rot: '-12deg', duration: '16s' },
+  { Icon: HotelIcon, size: 30, color: PALETTE.sunsetOrange, top: '12%', left: '28%', dx: 26, dy: 15, rot: '10deg', duration: '15s' },
+  { Icon: RestaurantIcon, size: 38, color: PALETTE.oceanBlue, top: '68%', left: '48%', dx: 34, dy: 19, rot: '-11deg', duration: '17s' },
+  { Icon: LocalBarIcon, size: 32, color: PALETTE.sunsetOrange, top: '42%', left: '72%', dx: 28, dy: 16, rot: '9deg', duration: '14s' },
+  { Icon: PoolIcon, size: 40, color: PALETTE.palmGreen, top: '30%', left: '92%', dx: 38, dy: 21, rot: '-10deg', duration: '16s' },
+  { Icon: MapIcon, size: 36, color: PALETTE.oceanBlue, top: '80%', left: '18%', dx: 32, dy: 18, rot: '12deg', duration: '15s' },
+  { Icon: WbSunnyIcon, size: 44, color: PALETTE.sunsetOrange, top: '10%', left: '82%', dx: 42, dy: 24, rot: '-8deg', duration: '18s' },
+  { Icon: SurfingIcon, size: 34, color: PALETTE.palmGreen, top: '90%', left: '65%', dx: 30, dy: 17, rot: '9deg', duration: '14s' },
+  { Icon: HikingIcon, size: 38, color: PALETTE.oceanBlue, top: '45%', left: '35%', dx: 34, dy: 19, rot: '-11deg', duration: '16s' }
+];
 
-  const particles = [
-    { Icon: FlightTakeoffIcon, size: 38, color: PALETTE.oceanBlue, top: '10%', left: '7%', dx: 40, dy: 26, rot: '12deg', duration: '12s' },
-    { Icon: LuggageIcon, size: 30, color: PALETTE.sunsetOrange, top: '24%', left: '86%', dx: 32, dy: 22, rot: '10deg', duration: '14s' },
-    { Icon: BeachAccessIcon, size: 32, color: PALETTE.palmGreen, top: '72%', left: '10%', dx: 36, dy: 24, rot: '9deg', duration: '13s' },
-    { Icon: DirectionsBoatIcon, size: 36, color: PALETTE.oceanBlue, top: '16%', left: '55%', dx: 44, dy: 28, rot: '12deg', duration: '16s' },
-    { Icon: CameraAltIcon, size: 28, color: PALETTE.sunsetOrange, top: '84%', left: '40%', dx: 34, dy: 24, rot: '8deg', duration: '12.5s' },
-    { Icon: TerrainIcon, size: 34, color: PALETTE.palmGreen, top: '40%', left: '18%', dx: 38, dy: 26, rot: '11deg', duration: '15s' },
-    { Icon: HotelIcon, size: 28, color: PALETTE.sunsetOrange, top: '46%', left: '92%', dx: 30, dy: 24, rot: '10deg', duration: '14.5s' },
-  ];
 
   return (
     <HeroRoot ref={sectionRef}>
