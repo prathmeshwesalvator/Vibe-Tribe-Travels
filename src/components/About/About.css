@@ -1,50 +1,104 @@
-/* Minimal, clean animations for About section */
+/* Base Section */
+.about-section {
+  background-color: #fdf6ec; /* Beige/Cream */
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+}
 
-.about-badge {
-  letter-spacing: 1.2px;
+/* Container Grid */
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1100px;
+  gap: 40px;
+}
+
+/* Left Side (Image) */
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image img {
+  max-width: 380px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* Right Side (Content) */
+.about-content {
+  flex: 1;
+  text-align: left;
+}
+
+.about-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0b3d2e; /* Deep Forest Green */
+  margin-bottom: 10px;
+}
+
+.about-subtitle {
   font-size: 1rem;
+  font-weight: 600;
+  color: #2e8b57; /* Palm Tree Green */
+  margin-bottom: 20px;
+  letter-spacing: 1px;
 }
 
-.about-orb {
-  animation: orb-float 5s ease-in-out infinite alternate;
+.about-text {
+  font-size: 1rem;
+  color: #333333; /* Charcoal Gray */
+  line-height: 1.7;
+  margin-bottom: 25px;
 }
 
-@keyframes orb-float {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(18px); }
+/* CTA Button */
+.about-btn {
+  background-color: #1d7a85; /* Ocean Blue */
+  color: #ffffff;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(29, 122, 133, 0.25);
 }
 
-.about-card:hover {
-  transform: translateY(-6px) scale(1.02);
+.about-btn:hover {
+  background-color: #f4a261; /* Sunset Orange */
+  color: #ffffff;
 }
 
-@media (max-width: 900px) {
-  .about-card {
-    margin-bottom: 1.5rem;
-    min-width: 0 !important;
-    width: 100% !important;
+/* Responsive */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
   }
-  .about-badge {
-    font-size: 0.95rem;
-  }
-}
 
-@media (max-width: 600px) {
-  .about-card {
-    margin-bottom: 1.5rem;
-    min-width: 0 !important;
-    width: 100% !important;
-  }
-  .about-badge {
-    font-size: 0.9rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-orb, .about-card {
-    animation: none !important;
-    transition: none !important;
+  .about-content {
+    text-align: center;
   }
 }
 
 
+
+/* Left Side (Lottie Animation) */
+.about-animation {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lottie-animation {
+  max-width: 380px;
+  width: 100%;
+  height: auto;
+}

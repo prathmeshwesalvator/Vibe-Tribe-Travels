@@ -1,53 +1,166 @@
-/* Orbit animation for chips */
-@keyframes orbitSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+/* Brand Palette */
+:root {
+  --deep-green: #0b3d2e;
+  --cream: #fdf6ec;
+  --ocean-blue: #1d7a85;
+  --sunset-orange: #f4a261;
+  --palm-green: #2e8b57;
+  --charcoal: #333333;
+  --light-gray: #f1f1f1;
+  --white: #ffffff;
 }
 
-/* Floating cards */
-@keyframes cardFloat {
-  0% { transform: translateY(0) }
-  50% { transform: translateY(-10px) }
-  100% { transform: translateY(0) }
+/* Hero Section */
+.hero {
+  position: relative;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 8%;
+  overflow: hidden;
+  min-height: 90vh;
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .hero-particle {
-    animation: none !important;
+.hero-content {
+  max-width: 550px;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: 900;
+}
+
+.hero-subtitle {
+  font-size: 1.6rem;
+  margin: 0.5rem 0;
+  color: var(--charcoal);
+  font-weight: 600;
+}
+
+.hero-text {
+  font-size: 1rem;
+  color: var(--charcoal);
+  opacity: 0.9;
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+}
+
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.6rem;
+  border-radius: 25px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background: var(--ocean-blue);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--deep-green);
+}
+
+.btn-secondary {
+  background: var(--sunset-orange);
+  color: var(--white);
+}
+
+.btn-secondary:hover {
+  background: var(--palm-green);
+}
+
+/* Right Visual */
+.hero-visual {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-logo {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 6px solid var(--deep-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-logo img {
+  width: 80%;
+  height: auto;
+}
+
+/* Floating Icons */
+.icon {
+  position: absolute;
+  width: 10vw;
+  min-width: 120px;
+  min-height: 120px;
+  height: 8vw;
+  opacity: 0.8;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* .icon-1 { top: 5%; left: 5%; } */
+.icon-2 { top: 5%; left: 5%; }
+.icon-3 { top: 10%; left: 33%; }
+.icon-4 { top: 23%; right: 25%; }
+.icon-5 { bottom: 35%; left: 3%; }
+.icon-6 { bottom: 10%; left: 22%; }
+.icon-7 { top: 8%; right: 5%; }
+.icon-8 { bottom: 12%; right: 8%; }
+.icon-9 { bottom: 5%; right: 38%; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 5%;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    margin-top: 2rem;
   }
 }
 
-/* Scroll cue animation */
-.scroll-cue svg {
-  animation: scrollPulse 1.6s ease-in-out infinite;
+
+
+/* Glassmorphism effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.15); /* transparent white */
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+
+  /* for responsiveness */
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+  color: #fff; /* ensure text contrasts */
 }
-
-.scroll-cue svg:nth-child(2) {
-  animation-delay: 0.15s;
-}
-
-.scroll-cue svg:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-@keyframes scrollPulse {
-  0% { transform: translateY(0); opacity: 0.2; }
-  50% { transform: translateY(4px); opacity: 0.9; }
-  100% { transform: translateY(0); opacity: 0.2; }
-}
-
-/* Particle movement with more drift/rotation */
-.hero-particle {
-  animation-name: heroFloat2D;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-@keyframes heroFloat2D {
-  0%   { transform: translate3d(0, 0, 0) rotate(0) scale(1); opacity: 0.85; }
-  50%  { transform: translate3d(var(--dx, 28px), calc(-1 * var(--dy, 20px)), 0) rotate(var(--rot, 10deg)) scale(1.08); opacity: 1; }
-  100% { transform: translate3d(0, 0, 0) rotate(0) scale(1); opacity: 0.85; }
-}
-
-
