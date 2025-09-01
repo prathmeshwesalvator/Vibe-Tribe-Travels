@@ -828,53 +828,7 @@ const DestinationsPage = () => {
           </Container>
         </Box>
 
-        {/* Footer */}
-        <Box sx={{ backgroundColor: 'primary.main', color: 'white', py: 6 }}>
-          <Container>
-            <Grid container spacing={4}>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
-                  Wanderlust
-                </Typography>
-                <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                  Creating unforgettable travel experiences since 2010. Your journey of a lifetime starts with us.
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
-                  Destinations
-                </Typography>
-                <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>Europe</Typography>
-                <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>Asia</Typography>
-                <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>North America</Typography>
-                <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>Africa</Typography>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
-                  Contact Us
-                </Typography>
-                <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>+1 (555) 123-4567</Typography>
-                <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>info@wanderlust.com</Typography>
-                <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>123 Travel Street, Paradise City</Typography>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
-                  Follow Us
-                </Typography>
-                <Box sx={{ display: 'flex', gap: 2 }}>
-                  <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>Facebook</Typography>
-                  <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>Instagram</Typography>
-                  <Typography variant="body2" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>Twitter</Typography>
-                </Box>
-              </Grid>
-            </Grid>
-            <Box sx={{ borderTop: '1px solid rgba(255,255,255,0.2)', mt: 4, pt: 3 }}>
-              <Typography variant="body2" align="center" sx={{ opacity: 0.7 }}>
-                © 2023 Wanderlust Travel Agency. All rights reserved.
-              </Typography>
-            </Box>
-          </Container>
-        </Box>
+ 
 
         {/* Floating Action Button */}
         <Fab 

@@ -19,6 +19,7 @@ const destinationOptions = [
   { value: "culture", label: "🏛️ Culture" },
   { value: "wildlife", label: "🦁 Wildlife" },
   { value: "luxury", label: "💎 Luxury" },
+  { value: "others", label: "🌍 Others" }
 ];
 
 const contactMethods = [
@@ -43,7 +44,7 @@ const contactMethods = [
   {
     icon: "📍",
     title: "Office",
-    value: "123 Travel Street, Adventure City, AC 12345",
+    value: "Ambernath",
   },
   {
     icon: "⏰",
@@ -93,7 +94,7 @@ const ContactPage = () => {
   return (
     <div className="contact-page">
       {/* Hero Section */}
-      <section className="page-hero" style={{ paddingTop: "5.5rem" }}>
+      <section className="page-hero" style={{ paddingTop: "5.5rem", display : "flex" , justifyContent : "center"}}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}

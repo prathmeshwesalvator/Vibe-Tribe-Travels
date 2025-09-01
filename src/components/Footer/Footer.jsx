@@ -235,29 +235,29 @@ const Footer = () => {
 
   const footerLinks = {
     company: [
-      { name: 'About Us', url: '#about' },
-      { name: 'Our Team', url: '#about' },
-      { name: 'Careers', url: '#' },
-      { name: 'Press', url: '#' }
+      { name: 'About Us', url: '/about' },
+      // { name: 'Our Team', url: '#about' },
+      // { name: 'Careers', url: '#' },
+      // { name: 'Press', url: '#' }
     ],
     services: [
-      { name: 'Destinations', url: '#destinations' },
-      { name: 'Travel Packages', url: '#' },
-      { name: 'Custom Tours', url: '#' },
-      { name: 'Group Travel', url: '#' }
+      { name: 'Destinations', url: '/destinations' },
+      { name: 'Travel Packages', url: '/destinations' },
+      { name: 'Custom Tours', url: '/contact' },
+      { name: 'Group Travel', url: '/contact' }
     ],
     support: [
-      { name: 'Help Center', url: '#' },
-      { name: 'Contact Us', url: '#contact' },
-      { name: 'Travel Insurance', url: '#' },
-      { name: 'Emergency Support', url: '#' }
+      // { name: 'Help Center', url: '#' },
+      { name: 'Contact Us', url: '/contact' },
+      // { name: 'Travel Insurance', url: '#' },
+      // { name: 'Emergency Support', url: '#' }
     ],
-    legal: [
-      { name: 'Privacy Policy', url: '#' },
-      { name: 'Terms of Service', url: '/terms-conditions' },
-      { name: 'Cookie Policy', url: '#' },
-      { name: 'GDPR', url: '#' }
-    ]
+    // legal: [
+    //   { name: 'Privacy Policy', url: '#' },
+    //   { name: 'Terms of Service', url: '/terms-conditions' },
+    //   { name: 'Cookie Policy', url: '#' },
+    //   { name: 'GDPR', url: '#' }
+    // ]
   };
 
   const socialLinks = [
@@ -385,7 +385,7 @@ const Footer = () => {
               </Grow>
             </Grid>
 
-            <Grid item xs={12} md={3} lg={2}>
+            {/* <Grid item xs={12} md={3} lg={2}>
               <Grow in={true} timeout={1600}>
                 <Box>
                   <FooterTitle variant="h6">Legal</FooterTitle>
@@ -398,7 +398,7 @@ const Footer = () => {
                   </Box>
                 </Box>
               </Grow>
-            </Grid>
+            </Grid> */}
 
 
                               {/* --- Add Google Map Embed Below --- */}
