@@ -90,24 +90,38 @@ const Media = styled(CardMedia)(({ theme }) => ({
 
 const featuredDestinations = [
   {
-    title: 'Santorini, Greece',
-    image: '/images/destinations/santorini.jpg',
-    tags: ['Sunsets', 'Aegean Sea', 'Cliffside'],
-    blurb: 'Whitewashed towns, blue domes, and iconic sunsets over the Aegean Sea.',
+    title: 'Rajasthan, India',
+    image: 'https://www.indianholiday.com/wordpress/wp-content/uploads/2025/06/Forts.jpg',  // replace with your actual image host or CDN
+    tags: ['Deserts', 'Palaces', 'Culture'],
+    blurb: 'The land of royals with majestic forts, desert dunes, and vibrant traditions.',
   },
   {
-    title: 'Kyoto, Japan',
-    image: '/images/destinations/kyoto.jpg',
-    tags: ['Temples', 'Culture', 'Nature'],
-    blurb: 'Historic temples and serene bamboo groves wrapped in timeless culture.',
+    title: 'Uttarakhand, India',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpqfxlikEXC9JIZJPaO17LsWKpa5k1-Hg3FQ&s',  // representative of Uttarakhand’s Himalayas
+    tags: ['Himalayas', 'Spirituality', 'Adventure'],
+    blurb: 'Snow-clad peaks, holy rivers, and adventure hubs nestled in the Himalayas.',
   },
   {
-    title: 'Bali, Indonesia',
-    image: '/images/destinations/bali.jpg',
-    tags: ['Beaches', 'Rice Terraces', 'Wellness'],
-    blurb: 'Golden beaches, emerald rice terraces, and soulful retreats in nature.',
+    title: 'Himachal Pradesh, India',
+    image: 'https://madtrek.com/wp-content/uploads/2023/08/Best-Places-To-Visit-In-Himachal-Pradesh-In-Summer-1.webp',  // feel free to swap with a relevant source
+    tags: ['Mountains', 'Valleys', 'Treks'],
+    blurb: 'Serene hill stations, apple orchards, and scenic valleys perfect for trekking.',
+  },
+  {
+    title: 'Kashmir, India',
+    image: 'https://www.holidify.com/images/bgImages/KASHMIR.jpg',
+    tags: ['Lakes', 'Mountains', 'Paradise'],
+    blurb: 'The “Paradise on Earth” with Dal Lake, snow-capped peaks, and tulip gardens.',
+  },
+  {
+    title: 'Sikkim, India',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE8H10eniV8kmRtL4CNrk7SdVaBnK6-hE__lG0xy8hvJcSys2BwqaGGuTgZwBpCOoUHv8&usqp=CAU',  // alpine lake in Sikkim
+    tags: ['Monasteries', 'Mount Kanchenjunga', 'Nature'],
+    blurb: 'A tranquil blend of Buddhist monasteries, alpine meadows, and the Himalayas.',
   },
 ];
+
+
 
 const Destinations = () => {
   const theme = useTheme();
@@ -216,7 +230,7 @@ const Destinations = () => {
                             px: 2,
                             '&:hover': { backgroundColor: PALETTE.sunsetOrange },
                           }}
-                          href="#"
+                          href="/destinations"
                         >
                           Explore
                         </Button>
