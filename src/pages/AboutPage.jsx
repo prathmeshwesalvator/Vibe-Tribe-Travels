@@ -311,10 +311,12 @@ const HeroSection = ({ isMobile }) => {
                 Vibe Tribe Travels is your one-stop destination for curated travel experiences that blend adventure, comfort, and connection.
               </Typography>
               <Box sx={{ display: "flex", gap: 2, flexWrap: isMobile ? "wrap" : "nowrap", mt: 4 }}>
-                <PrimaryButton>
+
+
+                <PrimaryButton href='/destinations'>
                   Explore Our Tours
                 </PrimaryButton>
-                <SecondaryButton>
+                <SecondaryButton href='/contact'>
                   Contact Us
                 </SecondaryButton>
               </Box>
@@ -796,7 +798,9 @@ const AboutUsPage = () => {
                     '&:hover': {
                       backgroundColor: '#e6914a',
                     }
-                  }}>
+                  }}
+
+                  href="/contact">
                     Get Started Today
                     <ArrowForward />
                   </PrimaryButton>

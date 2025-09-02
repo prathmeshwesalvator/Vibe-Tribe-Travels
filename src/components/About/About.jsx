@@ -31,7 +31,9 @@ const About = () => {
             travelers—from solo wanderers and families to corporate teams and
             student groups.
           </p>
+          <a href="/about">
           <button className="about-btn">Learn More</button>
+          </a>
         </div>
       </div>
     </section>

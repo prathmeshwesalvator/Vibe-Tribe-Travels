@@ -940,12 +940,12 @@ const DestinationsPage = () => {
                 Ready for Your Next Adventure?
               </Typography>
             </ScrollAnimation>
-            <ScrollAnimation>
+            {/* <ScrollAnimation>
               <Typography variant="h6" component="p" gutterBottom sx={{ mb: 4, maxWidth: '600px', mx: 'auto', textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
                 Sign up today and get 10% off your first booking. Don't miss out on exclusive deals and travel tips.
               </Typography>
-            </ScrollAnimation>
-            <ScrollAnimation>
+            </ScrollAnimation> */}
+            {/* <ScrollAnimation>
               <Button 
                 variant="contained" 
                 size="large" 
@@ -965,7 +965,7 @@ const DestinationsPage = () => {
               >
                 Subscribe Now
               </Button>
-            </ScrollAnimation>
+            </ScrollAnimation> */}
           </Container>
         </Box>
 

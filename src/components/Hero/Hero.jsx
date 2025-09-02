@@ -15,7 +15,7 @@ const Hero = () => {
     unique vibe.
   </p>
   <div className="hero-buttons">
-    <Link to="/get-started" className="btn btn-primary">
+    <Link to="/destinations" className="btn btn-primary">
       Get Started
     </Link>
     <Link to="/contact" className="btn btn-secondary">
