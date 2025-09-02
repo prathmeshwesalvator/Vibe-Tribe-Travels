@@ -1,4 +1,3 @@
-// DestinationsPage.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Container,
@@ -17,7 +16,6 @@ import {
   Fade,
   Zoom,
   Slide,
-  Rating,
   Drawer,
   List,
   ListItem,
@@ -25,7 +23,9 @@ import {
   Divider,
   TextField,
   InputAdornment,
-  Fab
+  Fab,
+  Tabs,
+  Tab
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -92,119 +92,330 @@ const theme = createTheme({
   },
 });
 
-// Sample destinations data
+// Real destinations data from the document
 const destinations = [
+  // Rajasthan destinations
   {
     id: 1,
-    name: 'Bali Tropical Paradise',
-    location: 'Indonesia',
-    description: 'Experience the perfect blend of culture, beaches, and nightlife in the Island of Gods.',
-    price: '$1,299',
-    image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    rating: 4.8,
-    reviews: 142,
-    featured: true,
-    tags: ['Beach', 'Cultural', 'Luxury'],
-    duration: '7 days',
-    discount: '15% OFF'
+    name: 'Rajasthan with Ranthambore',
+    location: 'Rajasthan, India',
+    description: 'Explore the royal heritage of Rajasthan with a wildlife experience at Ranthambore National Park.',
+    price: '₹26,999',
+    image: 'https://i.pinimg.com/736x/2a/2f/4c/2a2f4cdcc4691acd5b4206e9b3f623d4.jpg',
+    featured: false,
+    tags: ['Cultural', 'Wildlife', 'Heritage'],
+    duration: '7N-8D',
+    itinerary: 'Jaipur - Ranthambore - Pushkar - Udaipur - Jaisalmer - Desert camp - Jodhpur',
+    category: 'Rajasthan'
   },
   {
     id: 2,
-    name: 'Santorini Sunset Views',
-    location: 'Greece',
-    description: 'White-washed buildings and blue domes overlooking the Aegean Sea create a magical setting.',
-    price: '$1,899',
-    originalPrice: '$2,199',
-    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    rating: 4.9,
-    reviews: 218,
-    featured: true,
-    tags: ['Romantic', 'Luxury', 'Historic'],
-    duration: '5 days'
+    name: 'Rajasthan with Jawai',
+    location: 'Rajasthan, India',
+    description: 'Experience the royal state with a unique leopard safari at Jawai Bandh.',
+    price: '₹27,999',
+    image: 'https://i.pinimg.com/736x/fa/01/d8/fa01d8991fc8953feb71750370a7d219.jpg',
+    featured: false,
+    tags: ['Cultural', 'Wildlife', 'Leopard Safari'],
+    duration: '7N-8D',
+    itinerary: 'Jaipur - Pushkar - Jawai - Udaipur - Jaisalmer - Desert camp - Jodhpur',
+    category: 'Rajasthan'
   },
   {
     id: 3,
-    name: 'Swiss Alpine Adventure',
-    location: 'Switzerland',
-    description: 'Majestic mountains, crystal-clear lakes, and charming villages await in the heart of the Alps.',
-    price: '$2,199',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    rating: 4.7,
-    reviews: 89,
+    name: 'Rajasthan Tour',
+    location: 'Rajasthan, India',
+    description: 'A comprehensive tour of the Land of Kings covering major cultural destinations.',
+    price: '₹27,499',
+    image: 'https://i.pinimg.com/1200x/a1/ef/d0/a1efd09ad63c957bfae453ad60d6aec3.jpg',
     featured: false,
-    tags: ['Adventure', 'Mountains', 'Luxury'],
-    duration: '10 days',
-    discount: '10% OFF'
+    tags: ['Cultural', 'Heritage', 'Palaces'],
+    duration: '7N-8D',
+    itinerary: 'Jaipur - Pushkar - Jawai - Udaipur - Jaisalmer - Desert camp - Jodhpur',
+    category: 'Rajasthan'
   },
   {
     id: 4,
-    name: 'Japanese Cultural Journey',
-    location: 'Japan',
-    description: 'From ancient temples to futuristic cities, experience the unique contrast of traditional and modern Japan.',
-    price: '$2,499',
-    originalPrice: '$2,899',
-    image: 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    rating: 4.9,
-    reviews: 176,
-    featured: true,
-    tags: ['Cultural', 'Historic', 'Food'],
-    duration: '12 days'
+    name: 'Udaipur Getaway',
+    location: 'Udaipur, India',
+    description: 'Experience the City of Lakes with its beautiful palaces and serene lakes.',
+    price: '₹9,999',
+    image: 'https://i.pinimg.com/736x/ba/ed/11/baed1196dafd4d39db7f93cceb4a2b8c.jpg',
+    featured: false,
+    tags: ['Lakes', 'Palaces', 'Romantic'],
+    duration: '2N-3D',
+    category: 'Rajasthan'
   },
   {
     id: 5,
-    name: 'Safari Wilderness Experience',
-    location: 'Kenya',
-    description: 'Witness the great migration and incredible wildlife in their natural habitat.',
-    price: '$3,199',
-    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    rating: 4.8,
-    reviews: 124,
+    name: 'Jaisalmer Desert Experience',
+    location: 'Jaisalmer, India',
+    description: 'Explore the Golden City and experience the Thar Desert with a camel safari.',
+    price: '₹10,999',
+    image: 'https://i.pinimg.com/736x/94/a1/d8/94a1d8c09768a3477f8a352e6e1d67c4.jpg',
     featured: false,
-    tags: ['Adventure', 'Wildlife', 'Luxury'],
-    duration: '8 days'
+    tags: ['Desert', 'Fort', 'Camel Safari'],
+    duration: '2N-3D',
+    category: 'Rajasthan'
   },
   {
     id: 6,
-    name: 'New York City Explorer',
-    location: 'USA',
-    description: 'The city that never sleeps offers endless entertainment, dining, and cultural experiences.',
-    price: '$1,599',
-    originalPrice: '$1,899',
-    image: 'https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    rating: 4.6,
-    reviews: 95,
+    name: 'Jodhpur with Jaisalmer',
+    location: 'Rajasthan, India',
+    description: 'Explore the Blue City and Golden City in one comprehensive tour.',
+    price: '₹10,999',
+    image: 'https://i.pinimg.com/1200x/c0/09/44/c00944c86e90c247fad06a28db780fc9.jpg',
     featured: false,
-    tags: ['Urban', 'Shopping', 'Food'],
-    duration: '6 days',
-    discount: 'Early Bird'
+    tags: ['Fort', 'Desert', 'Cultural'],
+    duration: '2N-3D',
+    category: 'Rajasthan'
   },
+  
+  // Uttarakhand destinations
   {
     id: 7,
-    name: 'Thai Island Hopping',
-    location: 'Thailand',
-    description: 'Crystal clear waters, white sandy beaches, and vibrant nightlife await in the beautiful islands of Thailand.',
-    price: '$1,499',
-    image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    rating: 4.7,
-    reviews: 201,
+    name: 'Uttarakhand with Jim Corbett',
+    location: 'Uttarakhand, India',
+    description: 'Wildlife and nature experience with a safari in Jim Corbett National Park.',
+    price: '₹18,999',
+    image: 'https://i.pinimg.com/736x/c2/7b/65/c27b65a8085336763ce044902dd9cc3b.jpg',
     featured: false,
-    tags: ['Beach', 'Island', 'Adventure'],
-    duration: '9 days'
+    tags: ['Wildlife', 'Nature', 'Safari'],
+    duration: '4N-5D',
+    category: 'Uttarakhand'
   },
   {
     id: 8,
-    name: 'Italian Renaissance Tour',
-    location: 'Italy',
-    description: 'Explore the art, architecture, and cuisine of Italy\'s most beautiful cities from Rome to Florence.',
-    price: '$2,299',
-    originalPrice: '$2,599',
-    image: 'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-    rating: 4.9,
-    reviews: 189,
-    featured: true,
-    tags: ['Cultural', 'Historic', 'Food'],
-    duration: '10 days'
+    name: 'Rishikesh Retreat',
+    location: 'Rishikesh, India',
+    description: 'Yoga, meditation and adventure in the Yoga Capital of the World.',
+    price: '₹16,999',
+    image: 'https://i.pinimg.com/736x/cb/71/49/cb714920561dc0c6f83f7ed703ff2eae.jpg',
+    featured: false,
+    tags: ['Yoga', 'Adventure', 'Spiritual'],
+    duration: '3N-4D',
+    category: 'Uttarakhand'
   },
+  {
+    id: 9,
+    name: 'Nainital with Jim Corbett',
+    location: 'Uttarakhand, India',
+    description: 'Lake city beauty combined with wildlife adventure.',
+    price: '₹14,499',
+    image: 'https://i.pinimg.com/1200x/51/e8/b3/51e8b3a9f67ef57c370377c4bcd52371.jpg',
+    featured: false,
+    tags: ['Lakes', 'Wildlife', 'Hills'],
+    duration: '2N-3D',
+    category: 'Uttarakhand'
+  },
+  {
+    id: 10,
+    name: 'Uttarakhand Comprehensive',
+    location: 'Uttarakhand, India',
+    description: 'Complete Uttarakhand experience covering hill stations and spiritual sites.',
+    price: '₹25,499',
+    image: 'https://i.pinimg.com/1200x/82/80/d1/8280d11b934b2df7257d82c2dd846047.jpg',
+    featured: false,
+    tags: ['Hills', 'Spiritual', 'Nature'],
+    duration: '6N-7D',
+    itinerary: 'Delhi - 3N Mussoorie - Kanatal - 1N Rishikesh - Haridwar - 2N Nainital - Delhi',
+    category: 'Uttarakhand'
+  },
+  
+  // Himachal destinations
+  {
+    id: 11,
+    name: 'Shimla & Manali',
+    location: 'Himachal Pradesh, India',
+    description: 'Classic hill station tour covering the most popular destinations in Himachal.',
+    price: '₹13,999',
+    image: 'https://i.pinimg.com/736x/e6/46/46/e64646bc9e7f6a7690d2def5df64a2ec.jpg',
+    featured: false,
+    tags: ['Hills', 'Snow', 'Adventure'],
+    duration: '4N-5D',
+    itinerary: 'Chandigarh - Shimla - Manali - Solang Valley - Atul Tunnel - Sissu Waterfall - Chandigarh',
+    category: 'Himachal'
+  },
+  {
+    id: 12,
+    name: 'Himachal Explorer',
+    location: 'Himachal Pradesh, India',
+    description: 'Comprehensive Himachal tour with spiritual visit to Golden Temple.',
+    price: '₹18,999',
+    image: 'https://i.pinimg.com/736x/7e/43/ad/7e43adc06c1cb8353e385e87afb51a2e.jpg',
+    featured: false,
+    tags: ['Hills', 'Spiritual', 'Cultural'],
+    duration: '6N-7D',
+    itinerary: 'Chandigarh - Shimla - Manali - Kasol - Amritsar',
+    category: 'Himachal'
+  },
+  
+  // Kashmir destinations
+  {
+    id: 13,
+    name: 'Kashmir with Amritsar',
+    location: 'Kashmir & Punjab, India',
+    description: 'Paradise on earth combined with spiritual experience at Golden Temple.',
+    price: '₹18,999',
+    image: 'https://i.pinimg.com/1200x/c9/bc/76/c9bc762fd8ca7dcca92826b2e6356956.jpg',
+    featured: false,
+    tags: ['Valleys', 'Spiritual', 'Scenic'],
+    duration: '7N/8D',
+    itinerary: 'Amritsar - Srinagar - Gulmarg - Dhoodpatri - Pahalgam',
+    category: 'Kashmir'
+  },
+  {
+    id: 14,
+    name: 'Kashmir Paradise',
+    location: 'Kashmir, India',
+    description: 'Experience the breathtaking beauty of the Kashmir Valley.',
+    price: '₹14,999',
+    image: 'https://i.pinimg.com/1200x/7f/49/94/7f49944376c7d0c6d013469ca6104f4b.jpg',
+    featured: false,
+    tags: ['Valleys', 'Lakes', 'Scenic'],
+    duration: '5N/6D',
+    itinerary: 'Srinagar - Gulmarg - Dhoodpatri - Pahalgam',
+    category: 'Kashmir'
+  },
+  
+  // Sikkim destinations
+  {
+    id: 15,
+    name: 'Sikkim Discovery',
+    location: 'Sikkim, India',
+    description: 'Explore the beautiful hill stations of Gangtok and Darjeeling.',
+    price: '₹19,999',
+    image: 'https://i.pinimg.com/1200x/34/56/d6/3456d61f91c7c0f87ffd65d63a3d7308.jpg',
+    featured: false,
+    tags: ['Hills', 'Tea Gardens', 'Buddhist Culture'],
+    duration: '5N-6D',
+    itinerary: 'Gangtok & Darjeeling',
+    category: 'Sikkim'
+  },
+  
+  // Group Tour destinations
+  {
+    id: 16,
+    name: 'Udaipur Group Tour',
+    location: 'Udaipur, India',
+    description: 'Group tour to the City of Lakes with special discounted rates.',
+    price: '₹7,999',
+    image: 'https://i.pinimg.com/736x/ee/55/92/ee5592ebf285a29615e19abefd0ca85b.jpg',
+    featured: false,
+    tags: ['Group', 'Lakes', 'Budget'],
+    duration: '2N-3D',
+    category: 'Group Tour'
+  },
+  {
+    id: 17,
+    name: 'Jaisalmer Group Tour',
+    location: 'Jaisalmer, India',
+    description: 'Group tour to the Golden City with special discounted rates.',
+    price: '₹7,499',
+    image: 'https://i.pinimg.com/1200x/d4/a4/ff/d4a4ff4d5d3b662a5611420a262ce41b.jpg',
+    featured: false,
+    tags: ['Group', 'Desert', 'Budget'],
+    duration: '2N-3D',
+    category: 'Group Tour'
+  },
+  {
+    id: 18,
+    name: 'Jodhpur with Jaisalmer Group Tour',
+    location: 'Rajasthan, India',
+    description: 'Group tour covering both Jodhpur and Jaisalmer with special rates.',
+    price: '₹7,999',
+    image: 'https://i.pinimg.com/736x/4f/cf/a3/4fcfa3460c2d6bb4295e2745bcd83984.jpg',
+    featured: false,
+    tags: ['Group', 'Fort', 'Budget'],
+    duration: '2N-3D',
+    category: 'Group Tour'
+  },
+  {
+    id: 19,
+    name: 'Uttarakhand with Jim Corbett Group Tour',
+    location: 'Uttarakhand, India',
+    description: 'Group wildlife tour with special discounted rates.',
+    price: '₹13,999',
+    image: 'https://i.pinimg.com/736x/dd/8a/7a/dd8a7adf881510b6dde457ade09c72d3.jpg',
+    featured: false,
+    tags: ['Group', 'Wildlife', 'Budget'],
+    duration: '4N-5D',
+    category: 'Group Tour'
+  },
+  {
+    id: 20,
+    name: 'Rishikesh Group Tour',
+    location: 'Rishikesh, India',
+    description: 'Group spiritual and adventure tour with special rates.',
+    price: '₹12,999',
+    image: 'https://i.pinimg.com/736x/cb/71/49/cb714920561dc0c6f83f7ed703ff2eae.jpg',
+    featured: false,
+    tags: ['Group', 'Yoga', 'Budget'],
+    duration: '3N-4D',
+    category: 'Group Tour'
+  },
+  {
+    id: 21,
+    name: 'Nainital with Jim Corbett Group Tour',
+    location: 'Uttarakhand, India',
+    description: 'Group tour combining lake city and wildlife with special rates.',
+    price: '₹11,499',
+    image: 'https://i.pinimg.com/736x/26/89/62/268962ef40b3c86c1da6a7ebd53e1702.jpg',
+    featured: false,
+    tags: ['Group', 'Lakes', 'Budget'],
+    duration: '2N-3D',
+    category: 'Group Tour'
+  },
+  {
+    id: 22,
+    name: 'Shimla & Manali Group Tour',
+    location: 'Himachal Pradesh, India',
+    description: 'Group hill station tour with special discounted rates.',
+    price: '₹9,999',
+    image: 'https://i.pinimg.com/1200x/aa/61/a9/aa61a94a0239dc9cbc509c6b1c593e9f.jpg',
+    featured: false,
+    tags: ['Group', 'Hills', 'Budget'],
+    duration: '4N-5D',
+    itinerary: 'Chandigarh - Shimla - Manali - Solang Valley - Atul Tunnel - Sissu Waterfall - Chandigarh',
+    category: 'Group Tour'
+  },
+  {
+    id: 23,
+    name: 'Himachal Group Tour',
+    location: 'Himachal Pradesh, India',
+    description: 'Comprehensive group tour of Himachal with spiritual visit.',
+    price: '₹12,999',
+    image: 'https://i.pinimg.com/736x/1b/78/76/1b7876f89f7875896097c9dedeaa9e4f.jpg',
+    featured: false,
+    tags: ['Group', 'Hills', 'Budget'],
+    duration: '6N-7D',
+    itinerary: 'Chandigarh - Shimla - Manali - Kasol - Amritsar',
+    category: 'Group Tour'
+  },
+  {
+    id: 24,
+    name: 'Kashmir with Amritsar Group Tour',
+    location: 'Kashmir & Punjab, India',
+    description: 'Group tour to paradise with spiritual experience at special rates.',
+    price: '₹15,999',
+    image: 'https://i.pinimg.com/736x/d3/25/2c/d3252c30300394dd64113415308c3a07.jpg',
+    featured: false,
+    tags: ['Group', 'Valleys', 'Budget'],
+    duration: '7N/8D',
+    category: 'Group Tour'
+  },
+  {
+    id: 25,
+    name: 'Kashmir Group Tour',
+    location: 'Kashmir, India',
+    description: 'Group tour to Kashmir Valley with special discounted rates.',
+    price: '₹12,999',
+    image: 'https://i.pinimg.com/1200x/5e/bf/47/5ebf478aefc2c2bb712fb9a8d4361259.jpg',
+    featured: false,
+    tags: ['Group', 'Valleys', 'Budget'],
+    duration: '5N/6D',
+    category: 'Group Tour'
+  }
 ];
 
 // Animation for floating elements
@@ -251,19 +462,10 @@ function ScrollAnimation({ children, threshold = 0.1, ...props }) {
 
 // Main Destinations Page Component
 const DestinationsPage = () => {
-  const [featuredDestinations, setFeaturedDestinations] = useState([]);
-  const [otherDestinations, setOtherDestinations] = useState([]);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [likedCards, setLikedCards] = useState({});
-
-  useEffect(() => {
-    // Filter featured destinations
-    const featured = destinations.filter(dest => dest.featured);
-    const others = destinations.filter(dest => !dest.featured);
-    
-    setFeaturedDestinations(featured);
-    setOtherDestinations(others);
-  }, []);
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const scrollToDestinations = () => {
     const element = document.getElementById('destinations-section');
@@ -283,32 +485,26 @@ const DestinationsPage = () => {
     }));
   };
 
+  const handleCategoryChange = (event, newValue) => {
+    setActiveCategory(newValue);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredDestinations = destinations.filter(destination => {
+    const matchesCategory = activeCategory === 'All' || destination.category === activeCategory;
+    const matchesSearch = destination.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         destination.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         destination.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         destination.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
+
+  const categories = ['All', 'Rajasthan', 'Uttarakhand', 'Himachal', 'Kashmir', 'Sikkim', 'Group Tour'];
+
   const renderPriceSection = (destination) => {
-    if (destination.originalPrice) {
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Typography variant="h6" color="secondary.main" sx={{ fontWeight: 'bold' }}>
-            {destination.price}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-            {destination.originalPrice}
-          </Typography>
-          {destination.discount && (
-            <Chip 
-              label={destination.discount} 
-              size="small" 
-              sx={{ 
-                backgroundColor: 'warning.main', 
-                color: 'white', 
-                fontSize: '0.7rem',
-                height: '20px'
-              }} 
-            />
-          )}
-        </Box>
-      );
-    }
-    
     return (
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <Typography variant="h6" color="secondary.main" sx={{ fontWeight: 'bold' }}>
@@ -330,7 +526,7 @@ const DestinationsPage = () => {
     );
   };
 
-  const renderDestinationCard = (destination, isFeatured = false) => (
+  const renderDestinationCard = (destination) => (
     <Card 
       sx={{ 
         height: '100%', 
@@ -346,7 +542,7 @@ const DestinationsPage = () => {
         }
       }}
     >
-      <Box sx={{ position: 'relative', height: isFeatured ? 240 : 200, overflow: 'hidden' }}>
+      <Box sx={{ position: 'relative', height: 200, overflow: 'hidden' }}>
         <CardMedia
           component="img"
           height="100%"
@@ -373,24 +569,9 @@ const DestinationsPage = () => {
           </IconButton>
         </Box>
         
-        {isFeatured && (
+        {destination.category === 'Group Tour' && (
           <Chip 
-            label="Featured" 
-            sx={{ 
-              position: 'absolute', 
-              top: 12, 
-              left: 12, 
-              backgroundColor: 'warning.main', 
-              color: 'white', 
-              fontWeight: 'bold',
-              fontSize: '0.75rem'
-            }} 
-          />
-        )}
-        
-        {destination.discount && !destination.originalPrice && (
-          <Chip 
-            label={destination.discount} 
+            label="Group Tour" 
             sx={{ 
               position: 'absolute', 
               bottom: 12, 
@@ -406,7 +587,7 @@ const DestinationsPage = () => {
       
       <CardContent sx={{ flexGrow: 1, p: 2.5, pb: 1, display: 'flex', flexDirection: 'column' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1.5 }}>
-          <Typography variant={isFeatured ? "h6" : "subtitle1"} component="h3" color="primary.main" sx={{ 
+          <Typography variant="subtitle1" component="h3" color="primary.main" sx={{ 
             fontWeight: 'bold', 
             lineHeight: 1.2,
             pr: 1,
@@ -422,18 +603,6 @@ const DestinationsPage = () => {
           <Typography variant="body2" color="text.primary">
             {destination.location}
           </Typography>
-          <Box sx={{ ml: 'auto', display: 'flex', alignItems: 'center' }}>
-            <Rating 
-              value={destination.rating} 
-              readOnly 
-              size="small" 
-              precision={0.1}
-              sx={{ color: 'warning.main', mr: 0.5 }} 
-            />
-            <Typography variant="body2" color="text.primary" sx={{ fontSize: '0.8rem' }}>
-              ({destination.reviews})
-            </Typography>
-          </Box>
         </Box>
         
         <Typography variant="body2" color="text.primary" sx={{ 
@@ -447,6 +616,20 @@ const DestinationsPage = () => {
         }}>
           {destination.description}
         </Typography>
+        
+        {destination.itinerary && (
+          <Typography variant="body2" color="text.secondary" sx={{ 
+            mb: 2, 
+            fontSize: '0.8rem',
+            fontStyle: 'italic',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden'
+          }}>
+            Itinerary: {destination.itinerary}
+          </Typography>
+        )}
         
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.5 }}>
           <Chip 
@@ -492,6 +675,8 @@ const DestinationsPage = () => {
       </CardContent>
       
       <CardActions sx={{ p: 2.5, pt: 0, mt: 'auto' }}>
+          <a href="/contact">
+
         <Button 
           variant="contained" 
           fullWidth
@@ -502,8 +687,11 @@ const DestinationsPage = () => {
             fontWeight: 'bold'
           }}
         >
-          View Details
+        
+          Book Now
         </Button>
+                  </a>
+
       </CardActions>
     </Card>
   );
@@ -586,7 +774,7 @@ const DestinationsPage = () => {
           </Slide>
           <Fade in={true} timeout={2000}>
             <Typography variant="h5" component="p" gutterBottom sx={{ mb: 4, maxWidth: '600px', textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
-              Explore the world's most breathtaking destinations with our curated travel experiences
+              Explore India's most breathtaking destinations with our curated travel experiences
             </Typography>
           </Fade>
           <Zoom in={true} timeout={3000}>
@@ -623,12 +811,12 @@ const DestinationsPage = () => {
         <Container id="destinations-section" sx={{ py: 8, backgroundColor: 'background.default' }}>
           <ScrollAnimation>
             <Typography variant="h2" component="h2" align="center" gutterBottom color="primary.main" sx={{ mb: 2 }}>
-              Featured Destinations
+              Explore All Destinations
             </Typography>
           </ScrollAnimation>
           <ScrollAnimation>
             <Typography variant="h6" component="p" align="center" sx={{ mb: 6, maxWidth: '700px', mx: 'auto' }} color="text.primary">
-              Handpicked experiences for the discerning traveler seeking unique and memorable adventures
+              Explore our complete collection of incredible travel experiences across India
             </Typography>
           </ScrollAnimation>
 
@@ -637,6 +825,8 @@ const DestinationsPage = () => {
             <TextField
               fullWidth
               placeholder="Search destinations..."
+              value={searchQuery}
+              onChange={handleSearchChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -651,135 +841,86 @@ const DestinationsPage = () => {
                 }
               }}
             />
-            <Button 
-              variant="outlined" 
-              startIcon={<FilterList />}
-              sx={{ 
-                borderRadius: 2,
-                minWidth: '120px',
-                borderColor: 'primary.main',
-                color: 'primary.main'
-              }}
-            >
-              Filters
-            </Button>
           </Box>
 
-<Grid 
-  container 
-  spacing={3} 
-  display="flex"
-  flexWrap="wrap"   
+          {/* Category Tabs */}
+          <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
+            <Tabs 
+              value={activeCategory} 
+              onChange={handleCategoryChange}
+              variant="scrollable"
+              scrollButtons="auto"
+              allowScrollButtonsMobile
+              aria-label="destination categories"
+            >
+              {categories.map(category => (
+                <Tab key={category} label={category} value={category} />
+              ))}
+            </Tabs>
+          </Box>
+
+   <Box 
+  display="flex" 
+  flexWrap="wrap" 
+  gap={3}  // spacing between cards
 >
-  {featuredDestinations.map((destination) => (
-    <Grid 
-      item 
-      xs={12} 
-      sm={6} 
-      md={3}   // 4 per row on desktop
-      key={destination.id} 
-      sx={{ display: 'flex' }}
-      width= '350px'
-    >
-      <ScrollAnimation 
-        threshold={0.2} 
-        style={{ width: '100%', display: 'flex', height: 380 }} // fixed height
+  {filteredDestinations
+    .filter(dest => !dest.featured)
+    .map((destination) => (
+      <Box
+        key={destination.id}
+        flex={{ xs: "1 1 100%", sm: "1 1 calc(50% - 24px)", md: "1 1 calc(25% - 24px)" }} 
+        display="flex"
       >
-        {renderDestinationCard(destination, {
-          sx: {
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100%',   // stretch to uniform height
-          },
-        })}
-      </ScrollAnimation>
-    </Grid>
-  ))}
-</Grid>
-
-
-
-        </Container>
-
-        {/* All Destinations Section */}
-        <Container sx={{ py: 8, backgroundColor: 'background.paper' }}>
-          <ScrollAnimation>
-            <Typography variant="h2" component="h2" align="center" gutterBottom color="primary.main" sx={{ mb: 2 }}>
-              Explore Destinations
-            </Typography>
-          </ScrollAnimation>
-          <ScrollAnimation>
-            <Typography variant="h6" component="p" align="center" sx={{ mb: 6, maxWidth: '700px', mx: 'auto' }} color="text.primary">
-              Explore our complete collection of incredible travel experiences around the globe
-            </Typography>
-          </ScrollAnimation>
-
-
-
-          
-<Grid 
-  container 
-  spacing={3} 
-  display="flex"
-  flexWrap="wrap"
->
-  {otherDestinations.map((destination) => (
-    <Grid 
-      item 
-      xs={12} 
-      sm={6} 
-      md={3}   // 4 per row on desktop
-      key={destination.id} 
-      sx={{ display: 'flex' }}
-      width="350px"
-    >
-      <ScrollAnimation 
-        threshold={0.2} 
-        style={{ width: '100%', height: 380, display: 'flex' }} // fixed height
-      >
-        <Box
-          sx={{
-            width: '100%',
-            height: '100%',  // ensures uniform height
-            display: 'flex',
-            flexDirection: 'column',
-          }}
+        <ScrollAnimation 
+          threshold={0.2} 
+          style={{ width: "100%", display: "flex", height: 380 }}
         >
-          {renderDestinationCard(destination, {
-            sx: {
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100%',
-            },
-          })}
-        </Box>
-      </ScrollAnimation>
-    </Grid>
-  ))}
-</Grid>
+          {renderDestinationCard(destination)}
+        </ScrollAnimation>
+      </Box>
+    ))}
+</Box>
 
 
-
-  
+            {filteredDestinations.length === 0 && (
+              <Box sx={{ textAlign: 'center', py: 8 }}>
+                <Typography variant="h5" color="text.secondary">
+                  No destinations found matching your criteria
+                </Typography>
+                <Button 
+                  variant="contained" 
+                  color="primary" 
+                  sx={{ mt: 2 }}
+                  onClick={() => {
+                    setActiveCategory('All');
+                    setSearchQuery('');
+                  }}
+                >
+                  Clear Filters
+                </Button>
+              </Box>
+            )}
+          
 
           {/* Load More Button */}
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
-            <Button 
-              variant="outlined" 
-              color="primary"
-              size="large"
-              sx={{ 
-                borderRadius: 2,
-                px: 4,
-                py: 1.5,
-                fontWeight: 'bold'
-              }}
-            >
-              Load More
-            </Button>
-          </Box>
+          {filteredDestinations.length > 0 && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
+              <Button 
+                variant="outlined" 
+                color="primary"
+                size="large"
+                sx={{ 
+                  borderRadius: 2,
+                  px: 4,
+                  py: 1.5,
+                  fontWeight: 'bold'
+                }}
+              >
+                Load More
+              </Button>
+            </Box>
+          )}
         </Container>
 
         {/* Call to Action Section */}
@@ -827,8 +968,6 @@ const DestinationsPage = () => {
             </ScrollAnimation>
           </Container>
         </Box>
-
- 
 
         {/* Floating Action Button */}
         <Fab 
