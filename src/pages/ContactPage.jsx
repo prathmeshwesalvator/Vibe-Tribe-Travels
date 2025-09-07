@@ -27,8 +27,8 @@ const contactMethods = [
     icon: "📧",
     title: "Email",
     value: (
-      <a href="mailto:hello@vibetribetravels.com" className="contact-link">
-        hello@vibetribetravels.com
+      <a href="mailto:info.vibetribetravels@gmail.com" className="contact-link">
+        info.vibetribetravels@gmail.com
       </a>
     ),
   },
@@ -36,21 +36,21 @@ const contactMethods = [
     icon: "📞",
     title: "Phone",
     value: (
-      <a href="tel:+15551234567" className="contact-link">
-        +1 (555) 123-4567
+      <a href="tel:+919309898602" className="contact-link">
+        +91 9309898602 / +91 8080674676
       </a>
     ),
   },
   {
     icon: "📍",
     title: "Office",
-    value: "Ambernath",
+    value: "Ambernath , Maharashtra , India",
   },
-  {
-    icon: "⏰",
-    title: "Business Hours",
-    value: "Mon-Fri: 9AM-6PM EST",
-  },
+  // {
+  //   icon: "⏰",
+  //   title: "Business Hours",
+  //   value: "Mon-Fri: 9AM-6PM EST",
+  // },
 ];
 
 const ContactPage = () => {

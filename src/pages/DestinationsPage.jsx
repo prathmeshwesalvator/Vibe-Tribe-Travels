@@ -95,45 +95,45 @@ const theme = createTheme({
 // Real destinations data from the document
 const destinations = [
   // Rajasthan destinations
-  {
-    id: 1,
-    name: 'Rajasthan with Ranthambore',
-    location: 'Rajasthan, India',
-    description: 'Explore the royal heritage of Rajasthan with a wildlife experience at Ranthambore National Park.',
-    price: '₹26,999',
-    image: 'https://i.pinimg.com/736x/2a/2f/4c/2a2f4cdcc4691acd5b4206e9b3f623d4.jpg',
-    featured: false,
-    tags: ['Cultural', 'Wildlife', 'Heritage'],
-    duration: '7N-8D',
-    itinerary: 'Jaipur - Ranthambore - Pushkar - Udaipur - Jaisalmer - Desert camp - Jodhpur',
-    category: 'Rajasthan'
-  },
-  {
-    id: 2,
-    name: 'Rajasthan with Jawai',
-    location: 'Rajasthan, India',
-    description: 'Experience the royal state with a unique leopard safari at Jawai Bandh.',
-    price: '₹27,999',
-    image: 'https://i.pinimg.com/736x/fa/01/d8/fa01d8991fc8953feb71750370a7d219.jpg',
-    featured: false,
-    tags: ['Cultural', 'Wildlife', 'Leopard Safari'],
-    duration: '7N-8D',
-    itinerary: 'Jaipur - Pushkar - Jawai - Udaipur - Jaisalmer - Desert camp - Jodhpur',
-    category: 'Rajasthan'
-  },
-  {
-    id: 3,
-    name: 'Rajasthan Tour',
-    location: 'Rajasthan, India',
-    description: 'A comprehensive tour of the Land of Kings covering major cultural destinations.',
-    price: '₹27,499',
-    image: 'https://i.pinimg.com/1200x/a1/ef/d0/a1efd09ad63c957bfae453ad60d6aec3.jpg',
-    featured: false,
-    tags: ['Cultural', 'Heritage', 'Palaces'],
-    duration: '7N-8D',
-    itinerary: 'Jaipur - Pushkar - Jawai - Udaipur - Jaisalmer - Desert camp - Jodhpur',
-    category: 'Rajasthan'
-  },
+  // {
+  //   id: 1,
+  //   name: 'Rajasthan with Ranthambore',
+  //   location: 'Rajasthan, India',
+  //   description: 'Explore the royal heritage of Rajasthan with a wildlife experience at Ranthambore National Park.',
+  //   price: '₹26,999',
+  //   image: 'https://i.pinimg.com/736x/2a/2f/4c/2a2f4cdcc4691acd5b4206e9b3f623d4.jpg',
+  //   featured: false,
+  //   tags: ['Cultural', 'Wildlife', 'Heritage'],
+  //   duration: '7N-8D',
+  //   itinerary: 'Jaipur - Ranthambore - Pushkar - Udaipur - Jaisalmer - Desert camp - Jodhpur',
+  //   category: 'Rajasthan'
+  // },
+  // {
+  //   id: 2,
+  //   name: 'Rajasthan with Jawai',
+  //   location: 'Rajasthan, India',
+  //   description: 'Experience the royal state with a unique leopard safari at Jawai Bandh.',
+  //   price: '₹27,999',
+  //   image: 'https://i.pinimg.com/736x/fa/01/d8/fa01d8991fc8953feb71750370a7d219.jpg',
+  //   featured: false,
+  //   tags: ['Cultural', 'Wildlife', 'Leopard Safari'],
+  //   duration: '7N-8D',
+  //   itinerary: 'Jaipur - Pushkar - Jawai - Udaipur - Jaisalmer - Desert camp - Jodhpur',
+  //   category: 'Rajasthan'
+  // },
+  // {
+  //   id: 3,
+  //   name: 'Rajasthan Tour',
+  //   location: 'Rajasthan, India',
+  //   description: 'A comprehensive tour of the Land of Kings covering major cultural destinations.',
+  //   price: '₹27,499',
+  //   image: 'https://i.pinimg.com/1200x/a1/ef/d0/a1efd09ad63c957bfae453ad60d6aec3.jpg',
+  //   featured: false,
+  //   tags: ['Cultural', 'Heritage', 'Palaces'],
+  //   duration: '7N-8D',
+  //   itinerary: 'Jaipur - Pushkar - Jawai - Udaipur - Jaisalmer - Desert camp - Jodhpur',
+  //   category: 'Rajasthan'
+  // },
   {
     id: 4,
     name: 'Udaipur Getaway',
@@ -208,19 +208,19 @@ const destinations = [
     duration: '2N-3D',
     category: 'Uttarakhand'
   },
-  {
-    id: 10,
-    name: 'Uttarakhand Comprehensive',
-    location: 'Uttarakhand, India',
-    description: 'Complete Uttarakhand experience covering hill stations and spiritual sites.',
-    price: '₹25,499',
-    image: 'https://i.pinimg.com/1200x/82/80/d1/8280d11b934b2df7257d82c2dd846047.jpg',
-    featured: false,
-    tags: ['Hills', 'Spiritual', 'Nature'],
-    duration: '6N-7D',
-    itinerary: 'Delhi - 3N Mussoorie - Kanatal - 1N Rishikesh - Haridwar - 2N Nainital - Delhi',
-    category: 'Uttarakhand'
-  },
+  // {
+  //   id: 10,
+  //   name: 'Uttarakhand Comprehensive',
+  //   location: 'Uttarakhand, India',
+  //   description: 'Complete Uttarakhand experience covering hill stations and spiritual sites.',
+  //   price: '₹25,499',
+  //   image: 'https://i.pinimg.com/1200x/82/80/d1/8280d11b934b2df7257d82c2dd846047.jpg',
+  //   featured: false,
+  //   tags: ['Hills', 'Spiritual', 'Nature'],
+  //   duration: '6N-7D',
+  //   itinerary: 'Delhi - 3N Mussoorie - Kanatal - 1N Rishikesh - Haridwar - 2N Nainital - Delhi',
+  //   category: 'Uttarakhand'
+  // },
   
   // Himachal destinations
   {

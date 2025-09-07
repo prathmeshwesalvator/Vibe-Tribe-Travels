@@ -90,7 +90,7 @@
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  background: var(--white);
+  background: var(--cream);
   border: 6px solid var(--deep-green);
   display: flex;
   align-items: center;

@@ -284,7 +284,7 @@ const Footer = () => {
                     Vibe Tribe Travels
                   </BrandName>
                   <BrandDescription variant="body1">
-                    Making your travel dreams come true since 2013. We specialize in creating 
+                    Making your travel dreams come true. We specialize in creating 
                     unforgettable experiences that connect you with the world's most beautiful destinations.
                   </BrandDescription>
                   
@@ -292,29 +292,29 @@ const Footer = () => {
                     <ContactIcon>
                       <PhoneIcon fontSize="small" />
                     </ContactIcon>
-                    <Typography variant="body2">+1 (555) 123-4567</Typography>
+                    <Typography variant="body2">+91 9309898602 / +91 8080674676</Typography>
                   </ContactInfo>
                   
                   <ContactInfo>
                     <ContactIcon>
                       <EmailIcon fontSize="small" />
                     </ContactIcon>
-                    <Typography variant="body2">info@vibetribetravels.com</Typography>
+                    <Typography variant="body2">info.vibetribetravels@gmail.com</Typography>
                   </ContactInfo>
                   
                   <ContactInfo>
                     <ContactIcon>
                       <LocationIcon fontSize="small" />
                     </ContactIcon>
-                    <Typography variant="body2">123 Travel Street, Adventure City</Typography>
+                    <Typography variant="body2">Ambernath , Maharashtra , India</Typography>
                   </ContactInfo>
-                  
+{/*                   
                   <ContactInfo>
                     <ContactIcon>
                       <TimeIcon fontSize="small" />
                     </ContactIcon>
                     <Typography variant="body2">Mon-Fri: 9AM-6PM, Sat: 10AM-4PM</Typography>
-                  </ContactInfo>
+                  </ContactInfo> */}
                   
                   <SocialContainer>
                     {socialLinks.map((social, index) => (
