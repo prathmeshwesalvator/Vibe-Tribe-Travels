@@ -19,6 +19,7 @@
     "@popperjs/core": "^2.11.8",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.2",
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^12.23.12",
     "lottie-react": "^2.4.1",
     "react": "^19.1.1",

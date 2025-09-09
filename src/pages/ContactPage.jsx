@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./ContactPage.css";
 import { motion } from "framer-motion";
+import emailjs from "emailjs-com";  // <-- import emailjs
 
 const initialFormState = {
   firstName: "",
@@ -46,17 +47,13 @@ const contactMethods = [
     title: "Office",
     value: "Ambernath , Maharashtra , India",
   },
-  // {
-  //   icon: "⏰",
-  //   title: "Business Hours",
-  //   value: "Mon-Fri: 9AM-6PM EST",
-  // },
 ];
 
 const ContactPage = () => {
   const [formData, setFormData] = useState(initialFormState);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const formRef = useRef(); // <-- ref for form
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -67,7 +64,6 @@ const ContactPage = () => {
   };
 
   const validateForm = () => {
-    // Simple validation: all required fields must be filled
     return (
       formData.firstName.trim() &&
       formData.lastName.trim() &&
@@ -83,33 +79,44 @@ const ContactPage = () => {
       return;
     }
     setSubmitting(true);
-    // Simulate async submission
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-      setFormData(initialFormState);
-    }, 1200);
+
+    // Send email using EmailJS
+    emailjs
+      .sendForm(
+        "service_3brwh39",      // replace with EmailJS service ID
+        "template_p8sd9me",     // replace with EmailJS template ID
+        formRef.current,        // form reference
+        "_koHg-ANN9elktUd_"       // replace with EmailJS public key
+      )
+      .then(
+        () => {
+          setSubmitting(false);
+          setSubmitted(true);
+          setFormData(initialFormState);
+        },
+        (error) => {
+          console.error("EmailJS error:", error);
+          setSubmitting(false);
+          alert("Failed to send message. Please try again later.");
+        }
+      );
   };
 
   return (
     <div className="contact-page">
       {/* Hero Section */}
-      <section className="page-hero" style={{ paddingTop: "5.5rem", display : "flex" , justifyContent : "center"}}>
+      <section
+        className="page-hero"
+        style={{ paddingTop: "5.5rem", display: "flex", justifyContent: "center" }}
+      >
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className="hero-content"
         >
-          <h1>
-            <span role="img" aria-label="sparkles">
-              ✨
-            </span>{" "}
-            Let's Plan Your Dream Trip
-          </h1>
-          <p>
-            Our travel experts are here to help you create unforgettable memories
-          </p>
+          <h1>✨ Let's Plan Your Dream Trip</h1>
+          <p>Our travel experts are here to help you create unforgettable memories</p>
           <div className="underline"></div>
         </motion.div>
       </section>
@@ -123,33 +130,23 @@ const ContactPage = () => {
             transition={{ duration: 0.8 }}
             className="section-header"
           >
-            <h2>
-              <span role="img" aria-label="envelope">
-                📬
-              </span>{" "}
-              Get In Touch
-            </h2>
+            <h2>📬 Get In Touch</h2>
             <p>
               Ready to start your next adventure? Contact us and let's plan the trip of your dreams.
             </p>
           </motion.div>
 
           <div className="contact-grid">
-            {/* Left - Info */}
+            {/* Left Info */}
             <motion.div
               initial={{ opacity: 0, x: -80 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="contact-info"
             >
-              <h3>
-                <span role="img" aria-label="compass">
-                  🧭
-                </span>{" "}
-                Let's Start Planning
-              </h3>
+              <h3>🧭 Let's Start Planning</h3>
               <p>
-                Whether it's a romantic getaway, family adventure, or solo exploration -{" "}
+                Whether it's a romantic getaway, family adventure, or solo exploration - 
                 we'll make sure every detail is perfect. Reach out and let us craft your next journey!
               </p>
 
@@ -162,9 +159,7 @@ const ContactPage = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * index, duration: 0.5 }}
                   >
-                    <span className="method-icon" aria-label={method.title}>
-                      {method.icon}
-                    </span>
+                    <span className="method-icon">{method.icon}</span>
                     <div>
                       <h5>{method.title}</h5>
                       <p>{method.value}</p>
@@ -174,19 +169,14 @@ const ContactPage = () => {
               </div>
             </motion.div>
 
-            {/* Right - Form */}
+            {/* Right Form */}
             <motion.div
               initial={{ opacity: 0, x: 80 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="contact-form"
             >
-              <h3>
-                <span role="img" aria-label="mailbox">
-                  📨
-                </span>{" "}
-                Send Us a Message
-              </h3>
+              <h3>📨 Send Us a Message</h3>
               {submitted ? (
                 <motion.div
                   className="form-success"
@@ -196,9 +186,7 @@ const ContactPage = () => {
                 >
                   <div className="success-icon">🎉</div>
                   <h4>Thank you for reaching out!</h4>
-                  <p>
-                    We've received your message and will get back to you as soon as possible.
-                  </p>
+                  <p>We've received your message and will get back to you soon.</p>
                   <button
                     className="btn-submit secondary"
                     onClick={() => setSubmitted(false)}
@@ -207,7 +195,7 @@ const ContactPage = () => {
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} autoComplete="off">
+                <form ref={formRef} onSubmit={handleSubmit} autoComplete="off">
                   <div className="form-row">
                     <input
                       type="text"
@@ -216,7 +204,6 @@ const ContactPage = () => {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      autoComplete="given-name"
                     />
                     <input
                       type="text"
@@ -225,7 +212,6 @@ const ContactPage = () => {
                       value={formData.lastName}
                       onChange={handleInputChange}
                       required
-                      autoComplete="family-name"
                     />
                   </div>
                   <div className="form-row">
@@ -236,7 +222,6 @@ const ContactPage = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      autoComplete="email"
                     />
                     <input
                       type="tel"
@@ -244,7 +229,6 @@ const ContactPage = () => {
                       placeholder="Phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      autoComplete="tel"
                     />
                   </div>
                   <select
@@ -266,20 +250,13 @@ const ContactPage = () => {
                     onChange={handleInputChange}
                     required
                   ></textarea>
-                  <button
-                    type="submit"
-                    className="btn-submit"
-                    disabled={submitting}
-                  >
+                  <button type="submit" className="btn-submit" disabled={submitting}>
                     {submitting ? (
                       <span>
-                        <span className="spinner"></span>
-                        Sending...
+                        <span className="spinner"></span> Sending...
                       </span>
                     ) : (
-                      <>
-                        📤 Send Message
-                      </>
+                      <>📤 Send Message</>
                     )}
                   </button>
                 </form>
