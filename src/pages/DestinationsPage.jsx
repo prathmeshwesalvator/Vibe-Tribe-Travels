@@ -229,7 +229,7 @@ const destinations = [
     location: 'Himachal Pradesh, India',
     description: 'Classic hill station tour covering the most popular destinations in Himachal.',
     price: '₹13,999',
-    image: 'https://i.pinimg.com/736x/e6/46/46/e64646bc9e7f6a7690d2def5df64a2ec.jpg',
+    image: 'https://i.pinimg.com/736x/61/6e/69/616e698318a2f017dec714e2c452e05f.jpg',
     featured: false,
     tags: ['Hills', 'Snow', 'Adventure'],
     duration: '4N-5D',
